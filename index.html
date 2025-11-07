@@ -425,16 +425,16 @@
             </div>
           </div>
 
-          <!-- Coding Example 2 -->
+          <!-- Future Work -->
           <div class="column is-half">
-            <div class="box" style="text-align: left; min-height: 220px;">
-              <h4 class="title is-5" style="color: #2563eb;"><i class="fas fa-code"></i> Coding Problem (Algorithm)</h4>
-              <p><strong>Task:</strong> Implement a function to detect if a linked list has a cycle. Return True if a cycle exists, False otherwise. Optimize for O(1) space complexity.</p>
-              <p style="margin-top: 10px; font-size: 14px; color: #64748b;">
-                <strong>Domain:</strong> Coding &nbsp;|&nbsp; <strong>Source:</strong> Real-world problem
+            <div class="box" style="text-align: left; min-height: 220px; border: 2px dashed #cbd5e1; background-color: #f8fafc;">
+              <h4 class="title is-5" style="color: #64748b;"><i class="fas fa-flask"></i> Future Work: More Domains</h4>
+              <p style="color: #64748b;"><strong>Planned Extension:</strong> We plan to extend OckBench to additional domains such as algorithmic challenges, debugging tasks, and code transformation problems to provide more comprehensive token efficiency evaluation.</p>
+              <p style="margin-top: 10px; font-size: 14px; color: #94a3b8;">
+                <strong>Status:</strong> Coming in next version &nbsp;|&nbsp; <strong>Focus:</strong> Broader coverage
               </p>
-              <p style="margin-top: 10px; font-size: 13px; color: #2563eb; font-style: italic;">
-                Token variance: Some models provide extensive explanations, others are concise.
+              <p style="margin-top: 10px; font-size: 13px; color: #94a3b8; font-style: italic;">
+                Stay tuned for expanded benchmark coverage across more reasoning domains!
               </p>
             </div>
           </div>
@@ -450,15 +450,17 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Key Findings</h2>
-        <div class="content has-text-justified">
-          <ul style="text-align: left; display: inline-block; max-width: 700px;">
-            <li><strong>Significant efficiency gap between commercial and open-source models:</strong> Commercial models demonstrated superior performance with an average accuracy of 60.8% on math tasks, while open-source models averaged 35.3%.</li>
-            <li><strong>Wide variance in token efficiency among top performers:</strong> Among commercial models, one high-accuracy model required over 2× the tokens of another to achieve similar accuracy. For example, Gemini-2.5 Pro used 5,198 tokens at 68% accuracy, while GPT-5 used 2,336 tokens at 73% accuracy.</li>
-            <li><strong>"Thinking" modes significantly increase token consumption:</strong> Qwen models with "thinking" variants produced substantially higher token counts compared to their "non-thinking" counterparts, often without proportional accuracy gains. For instance, Qwen3-14B thinking used 8,190 tokens vs 3,010 tokens for non-thinking mode.</li>
-            <li><strong>GPT-4o emerges as the most token-efficient model:</strong> Despite lower accuracy than top performers, GPT-4o stands out with the best reasoning efficiency (14.1 on math, 12.9 on coding), using only 495-491 tokens on average.</li>
-            <li><strong>Small models can be less efficient than larger ones:</strong> Contrary to expectations, smaller models sometimes consumed more tokens than larger models for the same reasoning tasks, highlighting that parameter count alone doesn't determine efficiency.</li>
-            <li><strong>Token efficiency is a meaningful axis of differentiation:</strong> Models with comparable accuracy can differ by 10-18× in token consumption, revealing efficiency variance as a neglected but significant factor in LLM evaluation.</li>
-          </ul>
+        <div class="content has-text-centered">
+          <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+            <ul>
+              <li><strong>2× token variance among top models:</strong> Gemini-2.5 Pro used 2× more tokens than GPT-5 for similar accuracy (5,198 vs 2,336 tokens).</li>
+              <li><strong>GPT-4o is most token-efficient:</strong> Best reasoning efficiency of 14.1 (math) and 12.9 (coding) despite lower accuracy.</li>
+              <li><strong>"Thinking" modes costly:</strong> Qwen3-14B thinking used 2.7× more tokens than non-thinking (8,190 vs 3,010) without proportional gains.</li>
+              <li><strong>Commercial models lead:</strong> 60.8% average accuracy vs 35.3% for open-source on math tasks.</li>
+              <li><strong>10-18× efficiency differences:</strong> Models with comparable accuracy differ wildly in token consumption.</li>
+              <li><strong>Size doesn't guarantee efficiency:</strong> Smaller models sometimes use more tokens than larger ones for the same tasks.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
