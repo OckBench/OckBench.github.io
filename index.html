@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="OckBench: The first benchmark measuring decoding token efficiency alongside accuracy for LLM reasoning. Tokens are not to be multiplied without necessity.">
   <meta name="keywords" content="OckBench, LLM, Token Efficiency, Reasoning Benchmark, Ockham's Razor, Decoding Efficiency">
-  <title>OckBench: Tokens are Not to Be Multiplied without Necessity</title>
+  <title>OckBench: Tokens are Not to Be Multiplied without Necessity | NeurIPS 2025 Workshop on Efficient Reasoning</title>
 
   <link rel="icon" href="./static/images/ockbench-logo.svg">
 
@@ -99,8 +99,31 @@
             Tokens are Not to Be Multiplied without Necessity
           </h2>
           
+          <div class="is-size-5 publication-authors" style="margin: 20px auto;">
+            <span class="author-block">
+              <a href="#">Zheng Du</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Hao Kang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Ligeng Zhu</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Song Han</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Tushar Krishna</a><sup>1</sup>
+            </span>
+          </div>
+          
+          <div class="is-size-6 publication-authors" style="margin: 10px auto;">
+            <span class="author-block"><sup>1</sup>Georgia Institute of Technology</span>
+            <span class="author-block"><sup>2</sup>MIT</span>
+          </div>
+          
           <div class="is-size-5 publication-authors" style="width: 80%; margin: 20px auto;">
-            <span class="author-block" style="font-size:20px">NeurIPS 2025 Workshop</span>
+            <span class="author-block" style="font-size:20px">NeurIPS 2025 Workshop on Efficient Reasoning</span>
           </div>
 
           <div class="column has-text-centered">
@@ -177,6 +200,27 @@
           <p>
             Through experiments comparing multiple open- and closed-source models, we uncover that many models with comparable accuracy differ wildly in token consumption. For instance, among commercial models, one high-accuracy model required over 2× the tokens of another to achieve similar accuracy. This reveals that efficiency variance is a neglected but significant axis of differentiation in LLM evaluation.
           </p>
+          
+          <!-- Performance Comparison Figures -->
+          <div class="columns is-centered is-multiline" style="margin-top: 40px;">
+            <div class="column is-half">
+              <figure style="text-align: center;">
+                <img src="static/images/model_performance_comparison.png" alt="Model Performance Comparison across all evaluated models showing accuracy vs token efficiency trade-offs" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <figcaption style="text-align: center; margin-top: 15px; font-size: 14px; color: #dc2626; font-weight: 600;">
+                  Similar model size but takes drastically different time in reasoning tasks
+                </figcaption>
+              </figure>
+            </div>
+            
+            <div class="column is-half">
+              <figure style="text-align: center;">
+                <img src="static/images/performance_comparison_7b.png" alt="Performance comparison of 7B parameter models highlighting efficiency differences" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <figcaption style="text-align: center; margin-top: 15px; font-size: 14px; color: #dc2626; font-weight: 600;">
+                  Commercial models with similar performance level but spent token budget differently
+                </figcaption>
+              </figure>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -468,6 +512,30 @@
 </section>
 
 
+<section class="section" style="background-color: #f8fafc;">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Citation</h2>
+        <div class="content">
+          <p class="subtitle is-5">
+            If you find OckBench useful for your research, please cite our work
+          </p>
+        </div>
+        <div class="box" style="background-color: #ffffff; text-align: left; max-width: 700px; margin: 20px auto;">
+          <pre style="background-color: #f8fafc; padding: 20px; border-radius: 5px; overflow-x: auto; margin: 0;"><code>@inproceedings{du2025ockbench,
+  author    = {Du, Zheng and Kang, Hao and Zhu, Ligeng and Han, Song and Krishna, Tushar},
+  title     = {OckBench: Tokens are Not to Be Multiplied without Necessity},
+  booktitle = {NeurIPS 2025 Workshop on Efficient Reasoning},
+  year      = {2025}
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
@@ -478,7 +546,7 @@
         NeurIPS 2025 Workshop on Efficient Reasoning
       </p>
       <p style="font-size: 14px; color: #64748b; margin-top: 20px;">
-        This website is based on the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> template.
+        This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
       </p>
     </div>
   </div>
