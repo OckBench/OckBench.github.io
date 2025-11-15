@@ -232,78 +232,6 @@
 </section>
 
 
-<section class="section" style="background-color: #f8fafc;">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full">
-        <h2 class="title is-3">Benchmark Overview</h2>
-        <div class="content">
-          <p class="subtitle is-5">
-            OckBench provides comprehensive evaluation across multiple dimensions
-          </p>
-        </div>
-
-        <!-- Statistics Cards -->
-        <div class="columns is-multiline is-centered" style="margin-top: 30px;">
-          <div class="column is-one-quarter">
-            <div class="metric-card">
-              <div class="metric-title">Total Questions</div>
-              <div class="metric-value">400</div>
-            </div>
-          </div>
-          <div class="column is-one-quarter">
-            <div class="metric-card">
-              <div class="metric-title">Task Domains</div>
-              <div class="metric-value">2</div>
-            </div>
-          </div>
-          <div class="column is-one-quarter">
-            <div class="metric-card">
-              <div class="metric-title">Questions per Domain</div>
-              <div class="metric-value">200</div>
-            </div>
-          </div>
-          <div class="column is-one-quarter">
-            <div class="metric-card">
-              <div class="metric-title">Models Evaluated</div>
-              <div class="metric-value">18</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Task Domains -->
-        <div class="content has-text-left" style="margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
-          <h3 class="title is-4 has-text-centered">Benchmark Composition</h3>
-          <p style="text-align: justify;">
-            OckBench is structured to test LLMs' reasoning efficiency across two complementary domains: mathematical problem solving and coding skills. To better expose token-efficiency differences, we select questions that exhibit high variance in decoding token usage among baseline models.
-          </p>
-          <ul style="margin-top: 20px;">
-            <li><strong>Mathematics and Reasoning Tasks (200 questions):</strong> We adopt GSM8K, AIME24, and AIME25 as core reasoning benchmarks. We select the top 200 questions that exhibit high variance in decoding token usage among baseline models, ensuring the benchmark emphasizes efficiency contrast rather than merely ranking by accuracy.</li>
-            <li><strong>Software Engineering Tasks (200 questions):</strong> For the coding domain, we build a lightweight variant of MBPP, supplemented by 200 carefully curated real-world coding problems. These coding tasks cover algorithmic challenges, code transformation, debugging, and small-scale project tasks.</li>
-          </ul>
-        </div>
-
-        <!-- Evaluation Metrics -->
-        <div class="content has-text-left" style="margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
-          <h3 class="title is-4 has-text-centered">Evaluation Metrics</h3>
-          <p style="text-align: justify; margin-bottom: 15px;">
-            OckBench uses <strong>decoding token count</strong> as the core efficiency metric—a model- and hardware-agnostic measure that captures the intrinsic reasoning efficiency of models.
-          </p>
-          <ul>
-            <li><strong>Decoding Token Count (#Tokens):</strong> Total number of tokens generated during reasoning (model-agnostic, hardware-agnostic)</li>
-            <li><strong>Accuracy (%):</strong> Percentage of correctly solved problems</li>
-            <li><strong>Reasoning Efficiency:</strong> Computed as #Tokens / Accuracy, measuring cost per unit of correctness</li>
-          </ul>
-          <p style="text-align: justify; margin-top: 15px; font-style: italic; color: #64748b;">
-            By selecting questions with high variance in token consumption across models, OckBench reveals efficiency differences that traditional accuracy-only benchmarks miss.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
@@ -314,11 +242,11 @@
             Performance of various LLMs on OckBench. Models are ranked by their reasoning efficiency, 
             which is computed as #Tokens / Accuracy (lower is better). Click on the tabs to switch between Math and Coding domains.
           </p>
-          <p style="font-size: 14px; color: #64748b;">
+          <!-- <p style="font-size: 14px; color: #64748b;">
             <strong>#Tokens:</strong> Average decoding token count &nbsp;&nbsp;
             <strong>Accuracy (%):</strong> Percentage of correctly solved problems &nbsp;&nbsp;
             <strong>Reasoning Efficiency:</strong> #Tokens / Accuracy (lower is better)
-          </p>
+          </p> -->
         </div>
 
         <!-- Domain Tabs -->
@@ -353,24 +281,29 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>495</td><td>35</td><td><b>14.1</b></td></tr>
-              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>872</td><td>59</td><td><b>14.9</b></td></tr>
-              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-7B</b><br><span style="font-size: 12px; color: #858383;">NovaSky-AI</span></td><td>Open-Source</td><td>556</td><td>33</td><td>17.1</td></tr>
-              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>GPT-5</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,336</td><td><b>73</b></td><td>32.2</td></tr>
-              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>GPT-o3</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,347</td><td>64</td><td>36.8</td></tr>
-              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-2.5 Flash</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>4,777</td><td>66</td><td>72.6</td></tr>
-              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-2.5 Pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>5,198</td><td>68</td><td>76.2</td></tr>
-              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>3,010</td><td>33</td><td>92.0</td></tr>
-              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>3,494</td><td>30</td><td>118.4</td></tr>
-              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>3,692</td><td>30</td><td>124.1</td></tr>
-              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>5,540</td><td>40</td><td>139.4</td></tr>
-              <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-mini</b><br><span style="font-size: 12px; color: #858383;">NovaSky-AI</span></td><td>Open-Source</td><td>6,657</td><td>33</td><td>204.8</td></tr>
-              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>8,190</td><td>40</td><td>206.0</td></tr>
-              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>8,895</td><td>35</td><td>254.2</td></tr>
-              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>10,439</td><td>38</td><td>278.4</td></tr>
-              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>17,038</td><td>37</td><td>457.4</td></tr>
-              <tr><td>17</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>20,440</td><td>38</td><td>541.5</td></tr>
-              <tr><td>18</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>24,025</td><td>37</td><td>649.3</td></tr>
+              <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>530.02</td><td>61.00</td><td>868.9</td></tr>
+              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>977.43</td><td>80.50</td><td>1,214.2</td></tr>
+              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>963.65</td><td>62.00</td><td>1,554.3</td></tr>
+              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>GPT-5</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,016.37</td><td>88.50</td><td>2,278.4</td></tr>
+              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>GPT-o3</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,280.02</td><td>83.00</td><td>2,747.0</td></tr>
+              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>1,695.11</td><td>58.50</td><td>2,897.6</td></tr>
+              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>1,839.41</td><td>58.00</td><td>3,171.4</td></tr>
+              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,406.07</td><td>60.00</td><td>4,010.1</td></tr>
+              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,188.66</td><td>52.50</td><td>4,168.9</td></tr>
+              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-2.5 Pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>4,011.93</td><td>87.50</td><td>4,585.1</td></tr>
+              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,247.39</td><td>49.00</td><td>4,586.5</td></tr>
+              <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-2.5 Flash</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>3,970.64</td><td>85.00</td><td>4,671.3</td></tr>
+              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>4,028.84</td><td>71.50</td><td>5,634.7</td></tr>
+              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>5,217.71</td><td>73.50</td><td>7,098.9</td></tr>
+              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>5,399.09</td><td>74.50</td><td>7,247.1</td></tr>
+              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>4,271.45</td><td>57.50</td><td>7,428.6</td></tr>
+              <tr><td>17</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-32B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>5,710.06</td><td>76.00</td><td>7,513.2</td></tr>
+              <tr><td>18</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>5,775.52</td><td>73.50</td><td>7,857.9</td></tr>
+              <tr><td>19</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>7,133.56</td><td>74.50</td><td>9,575.2</td></tr>
+              <tr><td>20</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>7,254.51</td><td>71.50</td><td>10,146.2</td></tr>
+              <tr><td>21</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>7,321.98</td><td>70.00</td><td>10,460.0</td></tr>
+              <tr><td>22</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>8,684.22</td><td>67.00</td><td>12,961.5</td></tr>
+              <tr><td>23</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>8,942.01</td><td>64.00</td><td>13,971.9</td></tr>
             </tbody>
           </table>
         </div>
@@ -389,27 +322,97 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>491</td><td>38</td><td><b>12.9</b></td></tr>
-              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-7B</b><br><span style="font-size: 12px; color: #858383;">NovaSky-AI</span></td><td>Open-Source</td><td>348</td><td>23</td><td>15.1</td></tr>
-              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>782</td><td>47</td><td><b>16.6</b></td></tr>
-              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>GPT-5</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>1,436</td><td><b>75</b></td><td>19.1</td></tr>
-              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>Gemini 2.5 Pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>1,798</td><td><b>77</b></td><td>23.4</td></tr>
-              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>Gemini 2.5 Flash</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>2,346</td><td>60</td><td>39.1</td></tr>
-              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>GPT-o3</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>3,001</td><td>71</td><td>42.3</td></tr>
-              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>1,700</td><td>28</td><td>60.7</td></tr>
-              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,413</td><td>35</td><td>68.9</td></tr>
-              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,098</td><td>27</td><td>77.7</td></tr>
-              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>9,840</td><td>46</td><td>213.9</td></tr>
-              <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>10,498</td><td>48</td><td>218.7</td></tr>
-              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-mini</b><br><span style="font-size: 12px; color: #858383;">NovaSky-AI</span></td><td>Open-Source</td><td>5,603</td><td>24</td><td>233.5</td></tr>
-              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>11,738</td><td>41</td><td>286.3</td></tr>
-              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>12,563</td><td>39</td><td>322.1</td></tr>
-              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>12,895</td><td>40</td><td>322.4</td></tr>
-              <tr><td>17</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>12,648</td><td>32</td><td>395.3</td></tr>
-              <tr><td>18</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>14,537</td><td>31</td><td>468.9</td></tr>
+              <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>491</td><td>38</td><td>12.9</td></tr>
+              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>782</td><td>47</td><td>16.6</td></tr>
+              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>GPT-5</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>1,436</td><td>75</td><td>19.1</td></tr>
+              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>Gemini 2.5 Pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>1,798</td><td>77</td><td>23.4</td></tr>
+              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>Gemini 2.5 Flash</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>2,346</td><td>60</td><td>39.1</td></tr>
+              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>GPT-o3</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>3,001</td><td>71</td><td>42.3</td></tr>
+              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>1,700</td><td>28</td><td>60.7</td></tr>
+              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,413</td><td>35</td><td>68.9</td></tr>
+              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,098</td><td>27</td><td>77.7</td></tr>
+              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>9,840</td><td>46</td><td>213.9</td></tr>
+              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>10,498</td><td>48</td><td>218.7</td></tr>
+              <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>11,738</td><td>41</td><td>286.3</td></tr>
+              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>12,563</td><td>39</td><td>322.1</td></tr>
+              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>12,895</td><td>40</td><td>322.4</td></tr>
+              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>12,648</td><td>32</td><td>395.3</td></tr>
+              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>14,537</td><td>31</td><td>468.9</td></tr>
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" style="background-color: #f8fafc;">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Benchmark Overview</h2>
+        <div class="content">
+          <p class="subtitle is-5">
+            OckBench provides comprehensive evaluation across multiple dimensions
+          </p>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="columns is-multiline is-centered" style="margin-top: 30px;">
+          <div class="column is-one-quarter">
+            <div class="metric-card">
+              <div class="metric-title">Total Questions</div>
+              <div class="metric-value">400</div>
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="metric-card">
+              <div class="metric-title">Task Domains</div>
+              <div class="metric-value">2</div>
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="metric-card">
+              <div class="metric-title">Questions per Domain</div>
+              <div class="metric-value">200</div>
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="metric-card">
+              <div class="metric-title">Models Evaluated</div>
+              <div class="metric-value">23</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Task Domains -->
+        <div class="content has-text-left" style="margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+          <h3 class="title is-4 has-text-centered">Benchmark Composition</h3>
+          <p style="text-align: justify;">
+            OckBench is structured to test LLMs' reasoning efficiency across two complementary domains: mathematical problem solving and coding skills. To better expose token-efficiency differences, we select questions that exhibit high variance in decoding token usage among baseline models.
+          </p>
+          <ul style="margin-top: 20px;">
+            <li><strong>Mathematics and Reasoning Tasks (200 questions):</strong> We adopt GSM8K, AIME24, and AIME25 as core reasoning benchmarks. We select the top 200 questions that exhibit high variance in decoding token usage among baseline models, ensuring the benchmark emphasizes efficiency contrast rather than merely ranking by accuracy.</li>
+            <li><strong>Software Engineering Tasks (200 questions):</strong> For the coding domain, we build a lightweight variant of MBPP, supplemented by 200 carefully curated real-world coding problems. These coding tasks cover algorithmic challenges, code transformation, debugging, and small-scale project tasks.</li>
+          </ul>
+        </div>
+
+        <!-- Evaluation Metrics -->
+        <!-- <div class="content has-text-left" style="margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+          <h3 class="title is-4 has-text-centered">Evaluation Metrics</h3>
+          <p style="text-align: justify; margin-bottom: 15px;">
+            OckBench uses <strong>decoding token count</strong> as the core efficiency metric—a model- and hardware-agnostic measure that captures the intrinsic reasoning efficiency of models.
+          </p>
+          <ul>
+            <li><strong>Decoding Token Count (#Tokens):</strong> Total number of tokens generated during reasoning (model-agnostic, hardware-agnostic)</li>
+            <li><strong>Accuracy (%):</strong> Percentage of correctly solved problems</li>
+            <li><strong>Reasoning Efficiency:</strong> Computed as #Tokens / Accuracy, measuring cost per unit of correctness</li>
+          </ul>
+          <p style="text-align: justify; margin-top: 15px; font-style: italic; color: #64748b;">
+            By selecting questions with high variance in token consumption across models, OckBench reveals efficiency differences that traditional accuracy-only benchmarks miss.
+          </p>
+        </div> -->
       </div>
     </div>
   </div>
