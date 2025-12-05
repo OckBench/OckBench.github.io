@@ -143,7 +143,7 @@
               </span>
               <!-- Code Link -->
               <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://github.com/OckBench/OckBench" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
@@ -152,7 +152,7 @@
               </span>
               <!-- Dataset Link -->
               <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://huggingface.co/datasets/ockbench/ockbench" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <p style="font-size:18px">🤗</p>
                   </span>
@@ -230,7 +230,7 @@
           <div class="columns is-centered" style="margin-top: 30px;">
             <div class="column is-full">
               <figure style="text-align: center;">
-                <img src="static/images/accuracy_vs_tokens_refined_dense-1.png" alt="Accuracy vs token consumption trade-off analysis across dense and refined reasoning models" style="width: 100%; max-width: 1200px; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <img src="static/images/teaser.png" alt="Accuracy vs token consumption trade-off analysis across dense and refined reasoning models" style="width: 100%; max-width: 1200px; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                 <figcaption style="text-align: center; margin-top: 15px; font-size: 14px; color: #dc2626; font-weight: 600;">
                   Accuracy vs. token consumption trade-off analysis across dense and refined reasoning models, demonstrating the efficiency frontier for different model configurations
                 </figcaption>
@@ -293,29 +293,32 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>530.02</td><td>61.00</td><td>868.9</td></tr>
-              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>977.43</td><td>80.50</td><td>1,214.2</td></tr>
-              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>963.65</td><td>62.00</td><td>1,554.3</td></tr>
-              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>GPT-5</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,016.37</td><td>88.50</td><td>2,278.4</td></tr>
-              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>GPT-o3</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,280.02</td><td>83.00</td><td>2,747.0</td></tr>
-              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>1,695.11</td><td>58.50</td><td>2,897.6</td></tr>
-              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>1,839.41</td><td>58.00</td><td>3,171.4</td></tr>
-              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,406.07</td><td>60.00</td><td>4,010.1</td></tr>
-              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,188.66</td><td>52.50</td><td>4,168.9</td></tr>
-              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-2.5 Pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>4,011.93</td><td>87.50</td><td>4,585.1</td></tr>
-              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,247.39</td><td>49.00</td><td>4,586.5</td></tr>
-              <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-2.5 Flash</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>3,970.64</td><td>85.00</td><td>4,671.3</td></tr>
-              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>4,028.84</td><td>71.50</td><td>5,634.7</td></tr>
-              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>5,217.71</td><td>73.50</td><td>7,098.9</td></tr>
-              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>5,399.09</td><td>74.50</td><td>7,247.1</td></tr>
-              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>4,271.45</td><td>57.50</td><td>7,428.6</td></tr>
-              <tr><td>17</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-32B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>5,710.06</td><td>76.00</td><td>7,513.2</td></tr>
-              <tr><td>18</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>5,775.52</td><td>73.50</td><td>7,857.9</td></tr>
-              <tr><td>19</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>7,133.56</td><td>74.50</td><td>9,575.2</td></tr>
-              <tr><td>20</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>7,254.51</td><td>71.50</td><td>10,146.2</td></tr>
-              <tr><td>21</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>7,321.98</td><td>70.00</td><td>10,460.0</td></tr>
-              <tr><td>22</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>8,684.22</td><td>67.00</td><td>12,961.5</td></tr>
-              <tr><td>23</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>8,942.01</td><td>64.00</td><td>13,971.9</td></tr>
+              <!-- <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-7B</b><br><span style="font-size: 12px; color: #858383;">Skywork</span></td><td>Open Source</td><td>531.55</td><td>62.00</td><td>448.4</td></tr> -->
+              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>1,349.88</td><td>59.00</td><td>152.1</td></tr>
+              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>4,139.33</td><td>83.00</td><td>138.1</td></tr>
+              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>GPT-5</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>3,641.89</td><td>78.00</td><td>130.3</td></tr>
+              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>4,774.40</td><td>81.50</td><td>113.4</td></tr>
+              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-3 Pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>6,190.85</td><td>88.00</td><td>110.1</td></tr>
+              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>570.17</td><td>38.50</td><td>100.1</td></tr>
+              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>5,084.48</td><td>79.00</td><td>97.0</td></tr>
+              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>GPT-o3</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>3,513.90</td><td>69.50</td><td>95.5</td></tr>
+              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>4,797.89</td><td>76.50</td><td>93.3</td></tr>
+              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-2.5 Pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>6,392.96</td><td>83.00</td><td>89.4</td></tr>
+              <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-32B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open Source</td><td>5,387.96</td><td>78.00</td><td>88.1</td></tr>
+              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open Source</td><td>6,154.75</td><td>79.50</td><td>81.6</td></tr>
+              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>6,302.89</td><td>80.00</td><td>81.2</td></tr>
+              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open Source</td><td>7,026.88</td><td>79.00</td><td>70.2</td></tr>
+              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>6,478.45</td><td>72.00</td><td>57.6</td></tr>
+              <tr><td>17</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-2.5 Flash</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>7,984.58</td><td>74.50</td><td>51.8</td></tr>
+              <tr><td>18</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open Source</td><td>4,022.79</td><td>57.00</td><td>46.0</td></tr>
+              <tr><td>19</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open Source</td><td>4,147.26</td><td>56.50</td><td>43.5</td></tr>
+              <tr><td>20</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>980.29</td><td>34.50</td><td>41.9</td></tr>
+              <tr><td>21</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>2,421.85</td><td>43.50</td><td>34.0</td></tr>
+              <tr><td>22</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>1,713.91</td><td>36.00</td><td>27.2</td></tr>
+              <!-- <tr><td>23</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-mini</b><br><span style="font-size: 12px; color: #858383;">Skywork</span></td><td>Open Source</td><td>8,266.21</td><td>49.00</td><td>14.2</td></tr> -->
+              <tr><td>24</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>2,081.88</td><td>29.00</td><td>11.7</td></tr>
+              <tr><td>25</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>2,262.83</td><td>27.50</td><td>9.2</td></tr>
+              <tr><td>26</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>1,852.56</td><td>25.00</td><td>8.4</td></tr>
             </tbody>
           </table>
         </div>
@@ -334,22 +337,36 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>491</td><td>38</td><td>12.9</td></tr>
-              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>782</td><td>47</td><td>16.6</td></tr>
-              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>GPT-5</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>1,436</td><td>75</td><td>19.1</td></tr>
-              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>Gemini 2.5 Pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>1,798</td><td>77</td><td>23.4</td></tr>
-              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>Gemini 2.5 Flash</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>2,346</td><td>60</td><td>39.1</td></tr>
-              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>GPT-o3</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>3,001</td><td>71</td><td>42.3</td></tr>
-              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>1,700</td><td>28</td><td>60.7</td></tr>
-              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,413</td><td>35</td><td>68.9</td></tr>
-              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>2,098</td><td>27</td><td>77.7</td></tr>
-              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>9,840</td><td>46</td><td>213.9</td></tr>
-              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>10,498</td><td>48</td><td>218.7</td></tr>
-              <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>11,738</td><td>41</td><td>286.3</td></tr>
-              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>12,563</td><td>39</td><td>322.1</td></tr>
-              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>12,895</td><td>40</td><td>322.4</td></tr>
-              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>12,648</td><td>32</td><td>395.3</td></tr>
-              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>14,537</td><td>31</td><td>468.9</td></tr>
+              <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>519.31</td><td>61.00</td><td>851.3</td></tr>
+              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>gpt-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>639.80</td><td>74.50</td><td>858.1</td></tr>
+              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>493.23</td><td>53.50</td><td>921.9</td></tr>
+              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>gpt-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>573.54</td><td>61.50</td><td>932.6</td></tr>
+              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>631.42</td><td>54.00</td><td>1,169.3</td></tr>
+              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>1,584.41</td><td>96.50</td><td>1,641.8</td></tr>
+              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>990.27</td><td>51.00</td><td>1,941.7</td></tr>
+              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Qwen/Qwen3-4B</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>893.80</td><td>39.50</td><td>2,263.8</td></tr>
+              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>893.80</td><td>39.50</td><td>2,263.8</td></tr>
+              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>o3</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,335.24</td><td>93.50</td><td>2,497.6</td></tr>
+              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>1,073.26</td><td>41.50</td><td>2,586.2</td></tr>
+              <!-- <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-7B</b><br><span style="font-size: 12px; color: #858383;">Skywork</span></td><td>Open-Source</td><td>1,014.21</td><td>25.50</td><td>3,988.3</td></tr> -->
+              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B-Thinking-2507</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>4,846.07</td><td>85.50</td><td>5,671.6</td></tr>
+              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B-Thinking-2507</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>5,927.84</td><td>92.00</td><td>6,443.3</td></tr>
+              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>6,135.86</td><td>85.50</td><td>7,179.0</td></tr>
+              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>6,545.30</td><td>85.00</td><td>7,700.4</td></tr>
+              <tr><td>17</td><td style="text-align: left; padding-left: 10px;"><b>gemini-3-pro-preview</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>7,523.07</td><td>95.00</td><td>7,929.5</td></tr>
+              <tr><td>18</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-32B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>6,901.34</td><td>85.00</td><td>8,119.2</td></tr>
+              <tr><td>19</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>6,412.52</td><td>76.50</td><td>8,388.9</td></tr>
+              <tr><td>20</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>6,850.90</td><td>77.00</td><td>8,897.3</td></tr>
+              <tr><td>21</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>7,519.10</td><td>79.50</td><td>9,461.4</td></tr>
+              <tr><td>22</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>7,082.74</td><td>67.50</td><td>10,419.6</td></tr>
+              <tr><td>23</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>8,515.95</td><td>76.50</td><td>11,128.7</td></tr>
+              <tr><td>24</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-flash</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>9,884.73</td><td>85.00</td><td>11,629.1</td></tr>
+              <tr><td>25</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>9,808.19</td><td>79.00</td><td>12,417.9</td></tr>
+              <tr><td>26</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>10,521.25</td><td>70.50</td><td>14,959.2</td></tr>
+              <tr><td>27</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>10,637.60</td><td>65.50</td><td>16,251.0</td></tr>
+              <tr><td>28</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>13,639.89</td><td>58.00</td><td>23,517.1</td></tr>
+              <!-- <tr><td>29</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-mini</b><br><span style="font-size: 12px; color: #858383;">Skywork</span></td><td>Open-Source</td><td>15,132.72</td><td>51.00</td><td>29,672.0</td></tr> -->
+              <tr><td>30</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-flash-lite</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>54,042.28</td><td>40.50</td><td>133,435.3</td></tr>
             </tbody>
           </table>
         </div>
@@ -393,7 +410,7 @@
           <div class="column is-one-quarter">
             <div class="metric-card">
               <div class="metric-title">Models Evaluated</div>
-              <div class="metric-value">23</div>
+              <div class="metric-value">24</div>
             </div>
           </div>
         </div>
