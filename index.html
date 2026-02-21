@@ -192,33 +192,39 @@
             Through extensive evaluations on 47 frontier and open-source models, we find that top open-source models have nearly closed the accuracy gap but consume up to <strong>5.1× more tokens</strong> than commercial counterparts for comparable accuracy. Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating Per-Token Intelligence as the next key axis of LLM evaluation.
           </p>
           
-          <!-- Efficiency Gap Figures -->
-          <div class="columns is-centered is-multiline" style="margin-top: 40px;">
-            <div class="column is-half">
-              <figure style="text-align: center;">
-                <img src="static/images/deepseek_vs_gpt_comparison.png" alt="Open vs Closed Source: DeepSeek-V3.2 uses 5.1x more tokens than GPT-5.2 at similar accuracy" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <figcaption style="text-align: center; margin-top: 10px; font-size: 14px; color: #64748b;">
-                  <strong>Open vs. Closed Source Gap.</strong> DeepSeek-V3.2 matches GPT-5.2 (Low) in accuracy (~43%) but consumes 5.1× more tokens (25,492 vs 5,003).
-                </figcaption>
-              </figure>
-            </div>
-            <div class="column is-half">
-              <figure style="text-align: center;">
-                <img src="static/images/qwen3_series_comparison.png" alt="The Overthinking Tax: larger Qwen3 models are paradoxically more token-efficient than smaller ones" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <figcaption style="text-align: center; margin-top: 10px; font-size: 14px; color: #64748b;">
-                  <strong>The Overthinking Tax.</strong> In the Qwen3 family, larger models achieve higher accuracy with <em>fewer</em> tokens — smaller models over-generate to compensate.
-                </figcaption>
-              </figure>
-            </div>
+          <!-- Bubble Plot: Hero Figure -->
+          <div style="margin-top: 40px;">
+            <figure style="text-align: center;">
+              <img src="static/images/bubble_plot.png" alt="Accuracy vs. Token Consumption for all 47 evaluated models" style="width: 90%; max-width: 900px; height: auto; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);">
+              <figcaption style="margin-top: 12px; font-size: 14px; color: #64748b; max-width: 750px; margin-left: auto; margin-right: auto;">
+                Accuracy vs. Average Tokens across 47 evaluated models. Models in the upper-left corner are ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
+              </figcaption>
+            </figure>
           </div>
 
-          <!-- Bubble Plot: All Models -->
-          <div class="columns is-centered" style="margin-top: 30px;">
-            <div class="column is-full">
+          <!-- Three Key Observations -->
+          <div class="columns is-centered" style="margin-top: 50px;">
+            <div class="column is-one-third" style="padding: 12px 16px;">
               <figure style="text-align: center;">
-                <img src="static/images/bubble_plot.png" alt="Bubble plot: Accuracy vs Average Tokens for all 47 evaluated models" style="width: 100%; max-width: 1100px; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <figcaption style="text-align: center; margin-top: 10px; font-size: 14px; color: #64748b;">
-                  <strong>Figure: Accuracy vs. Token Consumption across 47 models.</strong> Models in the upper-left are ideal (high accuracy, low tokens). The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
+                <img src="static/images/performance_comparison_7b_modified.png" alt="7B models: AceReason-7B is 5x faster than DeepSeek-R1-7B at same parameter scale" style="width: 100%; height: 260px; object-fit: contain; border-radius: 8px; background: #fafafa;">
+                <figcaption style="margin-top: 10px; font-size: 13px; color: #64748b;">
+                  <strong>Same Scale, 5× Faster.</strong> At identical 7B parameters, AceReason-7B is 5.0× faster than DeepSeek-R1-7B by using 3.4× fewer tokens.
+                </figcaption>
+              </figure>
+            </div>
+            <div class="column is-one-third" style="padding: 12px 16px;">
+              <figure style="text-align: center;">
+                <img src="static/images/deepseek_vs_gpt_comparison.png" alt="Open vs Closed Source: DeepSeek-V3.2 uses 5.1x more tokens than GPT-5.2 at similar accuracy" style="width: 100%; height: 260px; object-fit: contain; border-radius: 8px; background: #fafafa;">
+                <figcaption style="margin-top: 10px; font-size: 13px; color: #64748b;">
+                  <strong>Open vs. Closed Gap.</strong> DeepSeek-V3.2 matches GPT-5.2 in accuracy but consumes 5.1× more tokens — open-source lags in per-token intelligence.
+                </figcaption>
+              </figure>
+            </div>
+            <div class="column is-one-third" style="padding: 12px 16px;">
+              <figure style="text-align: center;">
+                <img src="static/images/qwen3_series_comparison.png" alt="The Overthinking Tax: larger Qwen3 models use fewer tokens than smaller ones" style="width: 100%; height: 260px; object-fit: contain; border-radius: 8px; background: #fafafa;">
+                <figcaption style="margin-top: 10px; font-size: 13px; color: #64748b;">
+                  <strong>The Overthinking Tax.</strong> In the Qwen3 family, larger models are paradoxically <em>more</em> token-efficient — smaller models over-generate to compensate for lower capacity.
                 </figcaption>
               </figure>
             </div>
@@ -533,37 +539,6 @@
   </div>
 </section>
 
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Analysis</h2>
-        <div class="content">
-          <p class="subtitle is-5">Token distribution and scaling behavior across frontier models</p>
-        </div>
-        <div class="columns is-centered is-multiline" style="margin-top: 20px;">
-          <div class="column is-full">
-            <figure style="text-align: center;">
-              <img src="static/images/top200_all_token_histogram_4models.png" alt="Token distribution histograms for Gemini 3 Pro/Flash, GPT-5.2 High, GPT-5-mini High, Kimi K2 Thinking, DeepSeek-V3.2 Thinking" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-              <figcaption style="text-align: center; margin-top: 10px; font-size: 14px; color: #64748b;">
-                <strong>Token Distribution Across Problems.</strong> Histograms reveal large variance in reasoning verbosity. Gemini 3 Flash and Kimi-K2 show a saturation spike near the generation limit (~64k tokens), indicating frequent "reasoning collapse" on hard problems.
-              </figcaption>
-            </figure>
-          </div>
-          <div class="column is-full" style="margin-top: 20px;">
-            <figure style="text-align: center;">
-              <img src="static/images/top200_all_token_line_4models_with_difficulty.png" alt="Per-question token consumption sorted by difficulty for Gemini 3 Pro/Flash and GPT-5.2/5-mini" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-              <figcaption style="text-align: center; margin-top: 10px; font-size: 14px; color: #64748b;">
-                <strong>Token Consumption vs. Problem Difficulty.</strong> GPT-5.2 scales token usage gradually with difficulty (adaptive). Gemini 3 Pro stays flat (~20k) across most problems then hits a sharp "reasoning cliff" — a sign of higher per-token intelligence that delays reasoning collapse to harder questions.
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 <section class="section">
