@@ -174,21 +174,22 @@
             "Entities must not be multiplied beyond necessity." — The Principle of Ockham's Razor
           </p>
           <p>
-            Large Language Models (LLMs) such as GPT-4, Claude 3, and Gemini have demonstrated remarkable capabilities in complex problem-solving, largely attributed to their advanced reasoning abilities. Techniques like Chain of Thought (CoT) prompting and self-reflection have become central to this success, enabling models to perform step-by-step deductions for tasks requiring deep knowledge and logical rigor. However, as the industry increasingly emphasizes this "long decoding" mode, the computational cost associated with these reasoning processes has grown significantly.
+            Large Language Models (LLMs) like GPT-5, Gemini 3, and Claude serve as the frontier of automated intelligence, fueled by reasoning techniques like Chain of Thought (CoT). As the field embraces test-time compute scaling, models are increasingly trained to generate extensive token chains to tackle tougher problems. However, this massive inflation of decoding tokens introduces a critical bottleneck: solving just six problems in the International Olympiad in Informatics can now take over ten hours, and complex mathematical challenges frequently explode into millions of tokens.
           </p>
           <p>
-            While LLM evaluation and comparison have become increasingly important, most evaluations focus primarily on <strong>accuracy</strong> while the <strong>efficiency of generation</strong> is less discussed. For example, HELM, LM-Eval, and the LMSYS Chatbot Arena rank models almost entirely on task accuracy. Yet in real systems, the difference between generating 10K tokens vs 100K tokens is non-trivial in latency, cost, and energy.
+            While the community celebrates gains in reasoning capability, prevailing benchmarks like HELM and Chatbot Arena focus almost exclusively on output quality, ignoring this <strong>token efficiency crisis</strong>. In reality, many models consume vastly more tokens than necessary to reach the correct answer. Models of identical size (7B) achieving similar accuracy can differ by over <strong>3.4× in token consumption</strong> and <strong>5.0× in end-to-end latency</strong>. As accuracy on standard tasks approaches saturation, tokens must be treated as a cost — not a free resource.
           </p>
           <p>
-            We introduce <strong>OckBench</strong>, the first model-agnostic, hardware-agnostic benchmark that jointly measures <strong>accuracy and decoding token count</strong> for reasoning and coding tasks. Our key contributions include:
+            We introduce <strong>OckBench</strong>, the first model- and hardware-agnostic benchmark that jointly measures accuracy and token efficiency. Our key contributions include:
           </p>
           <ul style="text-align: left; display: inline-block;">
-            <li><strong>Model-Agnostic Efficiency Metric:</strong> We formalize decoding token count as an intrinsic, hardware- and system-independent efficiency metric</li>
-            <li><strong>Efficiency-Accuracy Aware Benchmark:</strong> The first unified benchmark specifically designed to evaluate LLM reasoning efficiency by measuring token consumption alongside accuracy</li>
-            <li><strong>Empirical Trade-offs:</strong> We conduct experiments across multiple open- and closed-source models, revealing substantial practical trade-offs on the accuracy–efficiency Pareto frontier</li>
+            <li><strong>Per-Token Intelligence:</strong> We introduce a new evaluation dimension — a superior model must not only achieve high accuracy but do so with minimal token consumption</li>
+            <li><strong>OckBench &amp; OckScore:</strong> A benchmark with a novel Differentiation Filter that isolates tasks exposing the efficiency gap, paired with OckScore (S<sub>Ock</sub> = Accuracy − 10 × log(Tokens / 10,000)) that penalizes unnecessary verbosity</li>
+            <li><strong>The Overthinking Tax:</strong> We formally quantify how smaller models often incur paradoxically higher deployment costs due to excessive verbose reasoning chains</li>
+            <li><strong>Optimization Pathways:</strong> We demonstrate that efficiency is tractable — both training-free model interpolation and difficulty-aware RL significantly improve OckScore</li>
           </ul>
           <p>
-            Through experiments comparing multiple open- and closed-source models, we uncover that many models with comparable accuracy differ wildly in token consumption. For instance, among commercial models, one high-accuracy model required over 2× the tokens of another to achieve similar accuracy. This reveals that efficiency variance is a neglected but significant axis of differentiation in LLM evaluation.
+            Through extensive evaluations on 47 frontier and open-source models, we find that top open-source models have nearly closed the accuracy gap but consume up to <strong>5.1× more tokens</strong> than commercial counterparts for comparable accuracy. Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating Per-Token Intelligence as the next key axis of LLM evaluation.
           </p>
           
           <!-- Performance Comparison Figures -->
@@ -237,8 +238,7 @@
         <h2 class="title is-3" id="leaderboard">Leaderboard</h2>
         <div class="content">
           <p class="mt-3">
-            Performance of various LLMs on OckBench. Models are ranked by their reasoning efficiency, 
-            which is computed as #Tokens / Accuracy (lower is better). Click on the tabs to switch between Math and Coding domains.
+            Performance of various LLMs on <strong>OckBench-Math</strong> (200 questions). Models are ranked by <strong>OckScore</strong> = Accuracy − 10 × log(Tokens / 10,000) — higher is better. Click on the tabs to switch between Math and Coding domains.
           </p>
           <!-- <p style="font-size: 14px; color: #64748b;">
             <strong>#Tokens:</strong> Average decoding token count &nbsp;&nbsp;
@@ -272,39 +272,59 @@
               <tr>
                 <th class="no-sort" style="vertical-align: middle; width: 50px;"><strong>#</strong></th>
                 <th class="no-sort" style="vertical-align: middle; width: 250px;"><strong>Model</strong></th>
-                <th class="no-sort" style="vertical-align: middle; width: 100px;"><strong>Category</strong></th>
-                <th data-js-sort-colNum="3" style="vertical-align: middle; width: 120px;"><strong>#Tokens</strong></th>
+                <th class="no-sort" style="vertical-align: middle; width: 100px;"><strong>License</strong></th>
+                <th data-js-sort-colNum="3" style="vertical-align: middle; width: 120px;"><strong>Avg Tokens</strong></th>
                 <th data-js-sort-colNum="4" style="vertical-align: middle; width: 120px;"><strong>Accuracy (%)</strong></th>
-                <th data-js-sort-colNum="5" style="vertical-align: middle; width: 150px;"><strong>Reasoning Efficiency</strong></th>
+                <th data-js-sort-colNum="5" style="vertical-align: middle; width: 160px;"><strong>OckScore ↑</strong></th>
               </tr>
             </thead>
             <tbody>
-              <!-- <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-7B</b><br><span style="font-size: 12px; color: #858383;">Skywork</span></td><td>Open Source</td><td>531.55</td><td>62.00</td><td>448.4</td></tr> -->
-              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>1,349.88</td><td>59.00</td><td>152.1</td></tr>
-              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>4,139.33</td><td>83.00</td><td>138.1</td></tr>
-              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>GPT-5</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>3,641.89</td><td>78.00</td><td>130.3</td></tr>
-              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>4,774.40</td><td>81.50</td><td>113.4</td></tr>
-              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-3 Pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>6,190.85</td><td>88.00</td><td>110.1</td></tr>
-              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>GPT-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>570.17</td><td>38.50</td><td>100.1</td></tr>
-              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>5,084.48</td><td>79.00</td><td>97.0</td></tr>
-              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>GPT-o3</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>3,513.90</td><td>69.50</td><td>95.5</td></tr>
-              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>4,797.89</td><td>76.50</td><td>93.3</td></tr>
-              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-2.5 Pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>6,392.96</td><td>83.00</td><td>89.4</td></tr>
-              <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-32B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open Source</td><td>5,387.96</td><td>78.00</td><td>88.1</td></tr>
-              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open Source</td><td>6,154.75</td><td>79.50</td><td>81.6</td></tr>
-              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>6,302.89</td><td>80.00</td><td>81.2</td></tr>
-              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open Source</td><td>7,026.88</td><td>79.00</td><td>70.2</td></tr>
-              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>6,478.45</td><td>72.00</td><td>57.6</td></tr>
-              <tr><td>17</td><td style="text-align: left; padding-left: 10px;"><b>Gemini-2.5 Flash</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>7,984.58</td><td>74.50</td><td>51.8</td></tr>
-              <tr><td>18</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open Source</td><td>4,022.79</td><td>57.00</td><td>46.0</td></tr>
-              <tr><td>19</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open Source</td><td>4,147.26</td><td>56.50</td><td>43.5</td></tr>
-              <tr><td>20</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>980.29</td><td>34.50</td><td>41.9</td></tr>
-              <tr><td>21</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>2,421.85</td><td>43.50</td><td>34.0</td></tr>
-              <tr><td>22</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>1,713.91</td><td>36.00</td><td>27.2</td></tr>
-              <!-- <tr><td>23</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-mini</b><br><span style="font-size: 12px; color: #858383;">Skywork</span></td><td>Open Source</td><td>8,266.21</td><td>49.00</td><td>14.2</td></tr> -->
-              <tr><td>24</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>2,081.88</td><td>29.00</td><td>11.7</td></tr>
-              <tr><td>25</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>2,262.83</td><td>27.50</td><td>9.2</td></tr>
-              <tr><td>26</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open Source</td><td>1,852.56</td><td>25.00</td><td>8.4</td></tr>
+              <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>gemini-3.1-pro-preview</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>24,765</td><td>75.5</td><td>70.09</td></tr>
+              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>gemini-3-pro-preview</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>20,154</td><td>72.0</td><td>67.21</td></tr>
+              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>gemini-3-flash-preview</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>36,212</td><td>71.0</td><td>64.35</td></tr>
+              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3.5-397B-A17B-FP8</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>33,994</td><td>68.5</td><td>62.07</td></tr>
+              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5.2 (high)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>19,541</td><td>66.0</td><td>61.30</td></tr>
+              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5.2 (medium)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>15,683</td><td>63.0</td><td>58.90</td></tr>
+              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5-mini (high)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>29,297</td><td>52.0</td><td>46.06</td></tr>
+              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Kimi-K2-Thinking</b><br><span style="font-size: 12px; color: #858383;">Kimi</span></td><td>Open-Source</td><td>41,746</td><td>52.5</td><td>45.36</td></tr>
+              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5.2 (low)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>5,003</td><td>41.5</td><td>39.74</td></tr>
+              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-V3.2-Thinking</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>25,492</td><td>43.5</td><td>38.00</td></tr>
+              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>o4-mini (high)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>25,677</td><td>43.5</td><td>37.98</td></tr>
+              <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5-mini (medium)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>8,831</td><td>38.5</td><td>35.75</td></tr>
+              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-pro</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>30,622</td><td>41.0</td><td>34.91</td></tr>
+              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>o4-mini (medium)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>6,514</td><td>36.0</td><td>33.82</td></tr>
+              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B-Thinking-2507</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>28,558</td><td>38.5</td><td>32.64</td></tr>
+              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>o3-mini (high)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>21,623</td><td>37.0</td><td>32.00</td></tr>
+              <tr><td>17</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B-Thinking-2507</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>30,513</td><td>37.0</td><td>30.92</td></tr>
+              <tr><td>18</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>19,098</td><td>31.0</td><td>26.36</td></tr>
+              <tr><td>19</td><td style="text-align: left; padding-left: 10px;"><b>o3-mini (medium)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>7,251</td><td>27.5</td><td>25.13</td></tr>
+              <tr><td>20</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B-Instruct-2507</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>7,707</td><td>27.0</td><td>24.52</td></tr>
+              <tr><td>21</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-R1</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>24,685</td><td>28.5</td><td>23.10</td></tr>
+              <tr><td>22</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-32B</b><br><span style="font-size: 12px; color: #858383;">AReaL</span></td><td>Open-Source</td><td>23,327</td><td>27.0</td><td>21.77</td></tr>
+              <tr><td>23</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">AceReason</span></td><td>Open-Source</td><td>19,424</td><td>25.0</td><td>20.31</td></tr>
+              <tr><td>24</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">AReaL</span></td><td>Open-Source</td><td>21,309</td><td>25.0</td><td>20.04</td></tr>
+              <tr><td>25</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5-mini (low)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,148</td><td>20.5</td><td>19.65</td></tr>
+              <tr><td>26</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-V3.2-Instruct</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>9,379</td><td>21.0</td><td>18.13</td></tr>
+              <tr><td>27</td><td style="text-align: left; padding-left: 10px;"><b>o3-mini (low)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>1,898</td><td>18.5</td><td>17.75</td></tr>
+              <tr><td>28</td><td style="text-align: left; padding-left: 10px;"><b>Kimi-K2-Instruct-0905</b><br><span style="font-size: 12px; color: #858383;">Kimi</span></td><td>Open-Source</td><td>3,823</td><td>18.5</td><td>17.09</td></tr>
+              <tr><td>29</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">AceReason</span></td><td>Open-Source</td><td>12,315</td><td>20.5</td><td>17.01</td></tr>
+              <tr><td>30</td><td style="text-align: left; padding-left: 10px;"><b>o4-mini (low)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,022</td><td>17.5</td><td>16.70</td></tr>
+              <tr><td>31</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>19,381</td><td>21.0</td><td>16.32</td></tr>
+              <tr><td>32</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B-Thinking-2507</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>27,238</td><td>22.0</td><td>16.29</td></tr>
+              <tr><td>33</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B-Instruct-2507</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>12,475</td><td>18.5</td><td>14.98</td></tr>
+              <tr><td>34</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">AReaL</span></td><td>Open-Source</td><td>24,127</td><td>20.0</td><td>14.67</td></tr>
+              <tr><td>35</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-R1-Distill-Qwen-32B</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>12,895</td><td>15.5</td><td>11.90</td></tr>
+              <tr><td>36</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-R1-Distill-Qwen-14B</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>13,211</td><td>15.0</td><td>11.34</td></tr>
+              <tr><td>37</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>24,207</td><td>16.5</td><td>11.16</td></tr>
+              <tr><td>38</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B-Instruct-2507</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>11,859</td><td>13.5</td><td>10.10</td></tr>
+              <tr><td>39</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B-Instruct</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>8,205</td><td>10.0</td><td>7.40</td></tr>
+              <tr><td>40</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-R1-Distill-Qwen-7B</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>41,415</td><td>14.5</td><td>7.39</td></tr>
+              <tr><td>41</td><td style="text-align: left; padding-left: 10px;"><b>gpt-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>4,668</td><td>8.5</td><td>6.84</td></tr>
+              <tr><td>42</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-flash</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>59,447</td><td>13.0</td><td>4.58</td></tr>
+              <tr><td>43</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B-Instruct</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>10,655</td><td>7.5</td><td>4.35</td></tr>
+              <tr><td>44</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B-Instruct</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>9,233</td><td>6.0</td><td>3.16</td></tr>
+              <tr><td>45</td><td style="text-align: left; padding-left: 10px;"><b>gpt-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>947</td><td>3.5</td><td>3.11</td></tr>
+              <tr><td>46</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-flash-lite</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>61,040</td><td>1.0</td><td>-7.52</td></tr>
             </tbody>
           </table>
         </div>
@@ -396,7 +416,7 @@
           <div class="column is-one-quarter">
             <div class="metric-card">
               <div class="metric-title">Models Evaluated</div>
-              <div class="metric-value">24</div>
+              <div class="metric-value">47</div>
             </div>
           </div>
         </div>
@@ -519,12 +539,12 @@
         <div class="content has-text-centered">
           <div style="max-width: 800px; margin: 0 auto; text-align: left;">
             <ul>
-              <li><strong>2× token variance among top models:</strong> Gemini-2.5 Pro used 2× more tokens than GPT-5 for similar accuracy (5,198 vs 2,336 tokens).</li>
-              <li><strong>GPT-4o is most token-efficient:</strong> Best reasoning efficiency of 14.1 (math) and 12.9 (coding) despite lower accuracy.</li>
-              <li><strong>"Thinking" modes costly:</strong> Qwen3-14B thinking used 2.7× more tokens than non-thinking (8,190 vs 3,010) without proportional gains.</li>
-              <li><strong>Commercial models lead:</strong> 60.8% average accuracy vs 35.3% for open-source on math tasks.</li>
-              <li><strong>10-18× efficiency differences:</strong> Models with comparable accuracy differ wildly in token consumption.</li>
-              <li><strong>Size doesn't guarantee efficiency:</strong> Smaller models sometimes use more tokens than larger ones for the same tasks.</li>
+              <li><strong>5× latency gap at the same scale:</strong> Among 7B models, AceReason-7B uses 12,315 tokens vs DeepSeek-R1-Distill-7B's 41,415 — a 3.4× token gap translating to a 5.0× end-to-end latency difference, despite identical parameter counts.</li>
+              <li><strong>Open-source accuracy ≈ commercial, but efficiency lags:</strong> Kimi-K2-Thinking matches GPT-5-mini-high in accuracy (52.5% vs 52.0%) but consumes 43% more tokens (41,746 vs 29,297). Open-source models have closed the capability gap but trail significantly in per-token intelligence.</li>
+              <li><strong>The Overthinking Tax:</strong> In the Qwen3 family, larger models are paradoxically <em>more</em> token-efficient — Qwen3-32B-Thinking uses 19,098 tokens at 31.0% accuracy, while Qwen3-4B-Thinking burns 27,238 tokens at just 22.0%. Smaller models compensate for lower capacity with verbose, inefficient reasoning chains.</li>
+              <li><strong>Cheaper per-token ≠ cheaper per-query:</strong> DeepSeek-R1-Distill-7B generates 3.13× more tokens than 14B (41,415 vs 13,211) yet achieves lower accuracy (14.5% vs 15.0%). Despite costing 50% less per token, the 7B model is 57% more expensive per query in practice.</li>
+              <li><strong>Gemini 3 Pro leads the frontier:</strong> Top OckScore of 70.09 with 75.5% accuracy at 24,765 avg tokens. Gemini 3 Pro resolves complex reasoning paths more succinctly than Gemini 3 Flash (36,212 tokens, OckScore 64.35), demonstrating that efficiency and accuracy are co-optimized at the frontier.</li>
+              <li><strong>Frontier models are rapidly converging:</strong> Comparing successive model generations reveals simultaneous improvement in both accuracy and token efficiency — validating Per-Token Intelligence as the primary next optimization objective for the community.</li>
             </ul>
           </div>
         </div>
