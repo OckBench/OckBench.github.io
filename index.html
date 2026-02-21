@@ -192,34 +192,33 @@
             Through extensive evaluations on 47 frontier and open-source models, we find that top open-source models have nearly closed the accuracy gap but consume up to <strong>5.1× more tokens</strong> than commercial counterparts for comparable accuracy. Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating Per-Token Intelligence as the next key axis of LLM evaluation.
           </p>
           
-          <!-- Performance Comparison Figures -->
+          <!-- Efficiency Gap Figures -->
           <div class="columns is-centered is-multiline" style="margin-top: 40px;">
             <div class="column is-half">
               <figure style="text-align: center;">
-                <img src="static/images/model_performance_comparison.png" alt="Model Performance Comparison across all evaluated models showing accuracy vs token efficiency trade-offs" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <figcaption style="text-align: center; margin-top: 15px; font-size: 14px; color: #dc2626; font-weight: 600;">
-                  Commercial models with similar performance level but spent token budget differently
+                <img src="static/images/deepseek_vs_gpt_comparison.png" alt="Open vs Closed Source: DeepSeek-V3.2 uses 5.1x more tokens than GPT-5.2 at similar accuracy" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <figcaption style="text-align: center; margin-top: 10px; font-size: 14px; color: #64748b;">
+                  <strong>Open vs. Closed Source Gap.</strong> DeepSeek-V3.2 matches GPT-5.2 (Low) in accuracy (~43%) but consumes 5.1× more tokens (25,492 vs 5,003).
                 </figcaption>
               </figure>
             </div>
-            
             <div class="column is-half">
               <figure style="text-align: center;">
-                <img src="static/images/performance_comparison_7b.png" alt="Performance comparison of 7B parameter models highlighting efficiency differences" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <figcaption style="text-align: center; margin-top: 15px; font-size: 14px; color: #dc2626; font-weight: 600;">
-                  Similar model size but takes drastically different time in reasoning tasks
+                <img src="static/images/qwen3_series_comparison.png" alt="The Overthinking Tax: larger Qwen3 models are paradoxically more token-efficient than smaller ones" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <figcaption style="text-align: center; margin-top: 10px; font-size: 14px; color: #64748b;">
+                  <strong>The Overthinking Tax.</strong> In the Qwen3 family, larger models achieve higher accuracy with <em>fewer</em> tokens — smaller models over-generate to compensate.
                 </figcaption>
               </figure>
             </div>
           </div>
-          
-          <!-- Additional Figure: Accuracy vs Tokens -->
+
+          <!-- Bubble Plot: All Models -->
           <div class="columns is-centered" style="margin-top: 30px;">
             <div class="column is-full">
               <figure style="text-align: center;">
-                <img src="static/images/teaser.png" alt="Accuracy vs token consumption trade-off analysis across dense and refined reasoning models" style="width: 100%; max-width: 1200px; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <figcaption style="text-align: center; margin-top: 15px; font-size: 14px; color: #dc2626; font-weight: 600;">
-                  Accuracy vs. token consumption trade-off analysis across dense and refined reasoning models, demonstrating the efficiency frontier for different model configurations
+                <img src="static/images/bubble_plot.png" alt="Bubble plot: Accuracy vs Average Tokens for all 47 evaluated models" style="width: 100%; max-width: 1100px; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <figcaption style="text-align: center; margin-top: 10px; font-size: 14px; color: #64748b;">
+                  <strong>Figure: Accuracy vs. Token Consumption across 47 models.</strong> Models in the upper-left are ideal (high accuracy, low tokens). The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
                 </figcaption>
               </figure>
             </div>
@@ -397,20 +396,20 @@
         <div class="columns is-multiline is-centered" style="margin-top: 30px;">
           <div class="column is-one-quarter">
             <div class="metric-card">
-              <div class="metric-title">Total Questions</div>
-              <div class="metric-value">400</div>
+              <div class="metric-title">OckBench-Math Questions</div>
+              <div class="metric-value">200</div>
             </div>
           </div>
           <div class="column is-one-quarter">
             <div class="metric-card">
               <div class="metric-title">Task Domains</div>
-              <div class="metric-value">2</div>
+              <div class="metric-value">3</div>
             </div>
           </div>
           <div class="column is-one-quarter">
             <div class="metric-card">
-              <div class="metric-title">Questions per Domain</div>
-              <div class="metric-value">200</div>
+              <div class="metric-title">Source Datasets</div>
+              <div class="metric-value">8+</div>
             </div>
           </div>
           <div class="column is-one-quarter">
@@ -425,12 +424,16 @@
         <div class="content has-text-left" style="margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
           <h3 class="title is-4 has-text-centered">Benchmark Composition</h3>
           <p style="text-align: justify;">
-            OckBench is structured to test LLMs' reasoning efficiency across two complementary domains: mathematical problem solving and coding skills. To better expose token-efficiency differences, we select questions that exhibit high variance in decoding token usage among baseline models.
+            OckBench aggregates tasks across three complementary reasoning domains. Rather than random sampling, we apply the <strong>Differentiation Filter</strong>: selecting problems where accuracy across models falls within 10%–90% (avoiding floor/ceiling effects) and token variance is maximized — isolating instances that reveal intrinsic efficiency differences.
           </p>
           <ul style="margin-top: 20px;">
-            <li><strong>Mathematics and Reasoning Tasks (200 questions):</strong> We adopt GSM8K, AIME24, and AIME25 as core reasoning benchmarks. We select the top 200 questions that exhibit high variance in decoding token usage among baseline models, ensuring the benchmark emphasizes efficiency contrast rather than merely ranking by accuracy.</li>
-            <li><strong>Software Engineering Tasks (200 questions):</strong> For the coding domain, we build a lightweight variant of MBPP, supplemented by 200 carefully curated real-world coding problems. These coding tasks cover algorithmic challenges, code transformation, debugging, and small-scale project tasks.</li>
+            <li><strong>Mathematics &amp; Reasoning:</strong> GSM8K, AIME 2024/2025, OlympiadBench, MATH500, AMO-Bench, and the mathematics subset of Humanity's Last Exam — spanning grade-school arithmetic to competition-level number theory.</li>
+            <li><strong>Software Engineering:</strong> A lightweight variant of MBPP and LiveCodeBench, assessing practical code generation and planning skills verified via unit test execution.</li>
+            <li><strong>Scientific Reasoning:</strong> ScienceQA, MMLU (STEM subsets), and GPQA-Diamond, testing knowledge-constrained reasoning and concision under technical load.</li>
           </ul>
+          <p style="margin-top: 20px; text-align: justify; font-style: italic; color: #64748b;">
+            The current leaderboard focuses on <strong>OckBench-Math</strong> (200 questions). All models evaluated with single-shot prompts and greedy decoding (temperature = 0) for reproducibility.
+          </p>
         </div>
 
         <!-- Evaluation Metrics -->
@@ -511,18 +514,50 @@
             </div>
           </div>
 
-          <!-- Future Work -->
+          <!-- Science Example -->
           <div class="column is-half">
-            <div class="box" style="text-align: left; min-height: 220px; border: 2px dashed #cbd5e1; background-color: #f8fafc;">
-              <h4 class="title is-5" style="color: #64748b;"><i class="fas fa-flask"></i> Future Work: More Domains</h4>
-              <p style="color: #64748b;"><strong>Planned Extension:</strong> We plan to extend OckBench to additional domains such as algorithmic challenges, debugging tasks, and code transformation problems to provide more comprehensive token efficiency evaluation.</p>
-              <p style="margin-top: 10px; font-size: 14px; color: #94a3b8;">
-                <strong>Status:</strong> Coming in next version &nbsp;|&nbsp; <strong>Focus:</strong> Broader coverage
+            <div class="box" style="text-align: left; min-height: 220px;">
+              <h4 class="title is-5" style="color: #2563eb;"><i class="fas fa-atom"></i> Science Problem (GPQA-Diamond)</h4>
+              <p><strong>Question:</strong> A molecule undergoes a photochemical reaction in which it absorbs a photon and transitions to an excited state. If the excited state has a lifetime of 10 ns, what is the natural linewidth (in Hz) of the corresponding spectral line?</p>
+              <p style="margin-top: 10px; font-size: 14px; color: #64748b;">
+                <strong>Domain:</strong> Scientific Reasoning &nbsp;|&nbsp; <strong>Source:</strong> GPQA-Diamond
               </p>
-              <p style="margin-top: 10px; font-size: 13px; color: #94a3b8; font-style: italic;">
-                Stay tuned for expanded benchmark coverage across more reasoning domains!
+              <p style="margin-top: 10px; font-size: 13px; color: #2563eb; font-style: italic;">
+                Token variance: Efficient models apply the uncertainty principle directly; verbose models re-derive it from scratch.
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Analysis</h2>
+        <div class="content">
+          <p class="subtitle is-5">Token distribution and scaling behavior across frontier models</p>
+        </div>
+        <div class="columns is-centered is-multiline" style="margin-top: 20px;">
+          <div class="column is-full">
+            <figure style="text-align: center;">
+              <img src="static/images/top200_all_token_histogram_4models.png" alt="Token distribution histograms for Gemini 3 Pro/Flash, GPT-5.2 High, GPT-5-mini High, Kimi K2 Thinking, DeepSeek-V3.2 Thinking" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+              <figcaption style="text-align: center; margin-top: 10px; font-size: 14px; color: #64748b;">
+                <strong>Token Distribution Across Problems.</strong> Histograms reveal large variance in reasoning verbosity. Gemini 3 Flash and Kimi-K2 show a saturation spike near the generation limit (~64k tokens), indicating frequent "reasoning collapse" on hard problems.
+              </figcaption>
+            </figure>
+          </div>
+          <div class="column is-full" style="margin-top: 20px;">
+            <figure style="text-align: center;">
+              <img src="static/images/top200_all_token_line_4models_with_difficulty.png" alt="Per-question token consumption sorted by difficulty for Gemini 3 Pro/Flash and GPT-5.2/5-mini" style="width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+              <figcaption style="text-align: center; margin-top: 10px; font-size: 14px; color: #64748b;">
+                <strong>Token Consumption vs. Problem Difficulty.</strong> GPT-5.2 scales token usage gradually with difficulty (adaptive). Gemini 3 Pro stays flat (~20k) across most problems then hits a sharp "reasoning cliff" — a sign of higher per-token intelligence that delays reasoning collapse to harder questions.
+              </figcaption>
+            </figure>
           </div>
         </div>
       </div>
