@@ -575,13 +575,16 @@
             If you find OckBench useful for your research, please cite our work
           </p>
         </div>
-        <div class="box" style="background-color: #ffffff; text-align: left; max-width: 700px; margin: 20px auto;">
-          <pre style="background-color: #f8fafc; padding: 20px; border-radius: 5px; overflow-x: auto; margin: 0;"><code>@article{du2025ockbench,
+        <div style="text-align: left; max-width: 700px; margin: 20px auto; position: relative;">
+          <pre style="background-color: #f0f2f5; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 0; border: 1px solid #d1d9e0;"><code>@article{du2025ockbench,
   title={OckBench: Measuring the Efficiency of LLM Reasoning},
   author={Du, Zheng and Kang, Hao and Han, Song and Krishna, Tushar and Zhu, Ligeng},
   journal={arXiv preprint arXiv:2511.05722},
   year={2025}
 }</code></pre>
+          <button onclick="copyBibtex(this)" style="position: absolute; top: 8px; right: 8px; background: #f0f2f5; border: 1px solid #d1d9e0; border-radius: 6px; padding: 5px 8px; cursor: pointer; font-size: 14px; color: #656d76; line-height: 1; transition: background 0.15s, color 0.15s;" onmouseenter="this.style.background='#e0e3e7';this.style.color='#1f2328'" onmouseleave="this.style.background='#f0f2f5';this.style.color='#656d76'">
+            <i class="far fa-copy"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -603,6 +606,17 @@
 </footer>
 
 <script>
+  // Copy BibTeX citation
+  function copyBibtex(btn) {
+    const code = btn.parentElement.querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.innerHTML = '<i class="fas fa-check" style="color:#1a7f37"></i>';
+      setTimeout(() => {
+        btn.innerHTML = '<i class="far fa-copy"></i>';
+      }, 2000);
+    });
+  }
+
   // Navbar burger toggle
   document.addEventListener('DOMContentLoaded', () => {
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
