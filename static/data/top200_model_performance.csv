@@ -1,6 +1,7 @@
 Model,Category,License,Accuracy (%),Avg Output Tokens,Correct,Total,Reasoning Efficiency
 gemini-3.1-pro-preview,Gemini,Commercial,75.5,24765,151,200,70.09
 gemini-3-pro-preview,Gemini,Commercial,72,20154,144,200,67.21
+Kimi-K2.5,Kimi,Open-Source,72.5,39567,145,200,65.55
 gemini-3-flash-preview,Gemini,Commercial,71,36212,142,200,64.35
 Qwen3.5-397B-A17B-FP8,Qwen,Open-Source,68.5,33994,137,200,62.07
 Qwen3.5-122B-A10B,Qwen,Open-Source,69.5,49080,139,200,61.79

@@ -186,15 +186,15 @@
             <li><strong>Optimization Pathways:</strong> We demonstrate that efficiency is tractable — both training-free model interpolation and difficulty-aware RL significantly improve OckScore</li>
           </ul>
           <p>
-            Through extensive evaluations on 50 frontier and open-source models, we find that top open-source models have nearly closed the accuracy gap but consume up to <strong>5.1× more tokens</strong> than commercial counterparts for comparable accuracy. Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating Per-Token Intelligence as the next key axis of LLM evaluation.
+            Through extensive evaluations on <span class="model-count">50</span> frontier and open-source models, we find that top open-source models have nearly closed the accuracy gap but consume up to <strong>5.1× more tokens</strong> than commercial counterparts for comparable accuracy. Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating Per-Token Intelligence as the next key axis of LLM evaluation.
           </p>
           
           <!-- Bubble Plot: Hero Figure -->
           <div style="margin-top: 40px;">
             <figure style="text-align: center;">
-              <img src="static/images/bubble_plot.png" alt="Accuracy vs. Token Consumption for all 50 evaluated models" style="width: 90%; max-width: 900px; height: auto; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);">
+              <img src="static/images/bubble_plot.png" alt="Accuracy vs. Token Consumption for all evaluated models" style="width: 90%; max-width: 900px; height: auto; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);">
               <figcaption style="margin-top: 12px; font-size: 14px; color: #64748b; max-width: 750px; margin-left: auto; margin-right: auto;">
-                Accuracy vs. Average Tokens across 50 evaluated models. Models in the upper-left corner are ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
+                Accuracy vs. Average Tokens across <span class="model-count">50</span> evaluated models. Models in the upper-left corner are ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
               </figcaption>
             </figure>
           </div>
@@ -244,7 +244,7 @@
           </p>
           <div style="margin-top: 12px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
             <button id="toggle-models-btn" class="button is-small is-rounded is-light" onclick="toggleLeaderboard()" style="font-size: 13px; color: #2563eb; border-color: #2563eb;">
-              Show all 50 models ▾
+              Loading models…
             </button>
             <button id="filter-all-btn" class="button is-small is-rounded" onclick="filterByLicense('all')" style="font-size: 13px; background: #2563eb; color: #fff; border-color: #2563eb;">
               All
@@ -297,56 +297,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr data-selected="true"><td>1</td><td style="text-align: left; padding-left: 10px;"><b>gemini-3.1-pro</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>24,765</td><td>75.5</td><td>70.09</td></tr>
-              <tr data-selected="true"><td>2</td><td style="text-align: left; padding-left: 10px;"><b>gemini-3-pro</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>20,154</td><td>72.0</td><td>67.21</td></tr>
-              <tr data-selected="true"><td>3</td><td style="text-align: left; padding-left: 10px;"><b>Kimi-K2.5</b><br><span style="font-size: 12px; color: #858383;">Kimi</span></td><td>Open-Source</td><td>39,567</td><td>72.5</td><td>65.55</td></tr>
-              <tr data-selected="true"><td>4</td><td style="text-align: left; padding-left: 10px;"><b>gemini-3-flash</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>36,212</td><td>71.0</td><td>64.35</td></tr>
-              <tr data-selected="true"><td>4</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3.5-397B-A17B</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>33,994</td><td>68.5</td><td>62.07</td></tr>
-              <tr data-selected="true"><td>5</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3.5-122B-A10B</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>49,080</td><td>69.5</td><td>61.79</td></tr>
-              <tr data-selected="true"><td>6</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5.2 (high)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>19,541</td><td>66.0</td><td>61.30</td></tr>
-              <tr data-selected="true"><td>6</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5.2 (medium)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>15,683</td><td>63.0</td><td>58.90</td></tr>
-              <tr data-selected="true"><td>8</td><td style="text-align: left; padding-left: 10px;"><b>GLM-5</b><br><span style="font-size: 12px; color: #858383;">GLM</span></td><td>Open-Source</td><td>46,167</td><td>57.0</td><td>49.51</td></tr>
-              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5-mini (high)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>29,297</td><td>52.0</td><td>46.06</td></tr>
-              <tr data-selected="true"><td>10</td><td style="text-align: left; padding-left: 10px;"><b>Kimi-K2-Thinking</b><br><span style="font-size: 12px; color: #858383;">Kimi</span></td><td>Open-Source</td><td>41,746</td><td>52.5</td><td>45.36</td></tr>
-              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5.2 (low)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>5,003</td><td>41.5</td><td>39.74</td></tr>
-              <tr data-selected="true"><td>10</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-V3.2-Thinking</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>25,492</td><td>43.5</td><td>38.00</td></tr>
-              <tr data-selected="true"><td>11</td><td style="text-align: left; padding-left: 10px;"><b>o4-mini (high)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>25,677</td><td>43.5</td><td>37.98</td></tr>
-              <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5-mini (medium)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>8,831</td><td>38.5</td><td>35.75</td></tr>
-              <tr data-selected="true"><td>13</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-pro</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>30,622</td><td>41.0</td><td>34.91</td></tr>
-              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>o4-mini (medium)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>6,514</td><td>36.0</td><td>33.82</td></tr>
-              <tr data-selected="true"><td>15</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>28,558</td><td>38.5</td><td>32.64</td></tr>
-              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>o3-mini (high)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>21,623</td><td>37.0</td><td>32.00</td></tr>
-              <tr><td>17</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>30,513</td><td>37.0</td><td>30.92</td></tr>
-              <tr><td>18</td><td style="text-align: left; padding-left: 10px;"><b>MiniMax-M2.5</b><br><span style="font-size: 12px; color: #858383;">MiniMax</span></td><td>Open-Source</td><td>32,040</td><td>36.0</td><td>29.76</td></tr>
-              <tr><td>19</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>19,098</td><td>31.0</td><td>26.36</td></tr>
-              <tr><td>19</td><td style="text-align: left; padding-left: 10px;"><b>o3-mini (medium)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>7,251</td><td>27.5</td><td>25.13</td></tr>
-              <tr><td>20</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B-Instruct</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>7,707</td><td>27.0</td><td>24.52</td></tr>
-              <tr data-selected="true"><td>21</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-R1</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>24,685</td><td>28.5</td><td>23.10</td></tr>
-              <tr><td>22</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-32B</b><br><span style="font-size: 12px; color: #858383;">AReaL</span></td><td>Open-Source</td><td>23,327</td><td>27.0</td><td>21.77</td></tr>
-              <tr><td>23</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">AceReason</span></td><td>Open-Source</td><td>19,424</td><td>25.0</td><td>20.31</td></tr>
-              <tr><td>24</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">AReaL</span></td><td>Open-Source</td><td>21,309</td><td>25.0</td><td>20.04</td></tr>
-              <tr><td>25</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5-mini (low)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,148</td><td>20.5</td><td>19.65</td></tr>
-              <tr><td>26</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-V3.2-Instruct</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>9,379</td><td>21.0</td><td>18.13</td></tr>
-              <tr><td>27</td><td style="text-align: left; padding-left: 10px;"><b>o3-mini (low)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>1,898</td><td>18.5</td><td>17.75</td></tr>
-              <tr><td>28</td><td style="text-align: left; padding-left: 10px;"><b>Kimi-K2-Instruct</b><br><span style="font-size: 12px; color: #858383;">Kimi</span></td><td>Open-Source</td><td>3,823</td><td>18.5</td><td>17.09</td></tr>
-              <tr><td>29</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">AceReason</span></td><td>Open-Source</td><td>12,315</td><td>20.5</td><td>17.01</td></tr>
-              <tr><td>30</td><td style="text-align: left; padding-left: 10px;"><b>o4-mini (low)</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,022</td><td>17.5</td><td>16.70</td></tr>
-              <tr><td>31</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>19,381</td><td>21.0</td><td>16.32</td></tr>
-              <tr><td>32</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>27,238</td><td>22.0</td><td>16.29</td></tr>
-              <tr><td>33</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B-Instruct</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>12,475</td><td>18.5</td><td>14.98</td></tr>
-              <tr><td>34</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">AReaL</span></td><td>Open-Source</td><td>24,127</td><td>20.0</td><td>14.67</td></tr>
-              <tr><td>35</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-R1-Distill-Qwen-32B</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>12,895</td><td>15.5</td><td>11.90</td></tr>
-              <tr><td>36</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-R1-Distill-Qwen-14B</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>13,211</td><td>15.0</td><td>11.34</td></tr>
-              <tr><td>37</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>24,207</td><td>16.5</td><td>11.16</td></tr>
-              <tr><td>38</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B-Instruct</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>11,859</td><td>13.5</td><td>10.10</td></tr>
-              <tr><td>39</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B-Instruct</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>8,205</td><td>10.0</td><td>7.40</td></tr>
-              <tr><td>40</td><td style="text-align: left; padding-left: 10px;"><b>DeepSeek-R1-Distill-Qwen-7B</b><br><span style="font-size: 12px; color: #858383;">DeepSeek</span></td><td>Open-Source</td><td>41,415</td><td>14.5</td><td>7.39</td></tr>
-              <tr data-selected="true"><td>41</td><td style="text-align: left; padding-left: 10px;"><b>gpt-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>4,668</td><td>8.5</td><td>6.84</td></tr>
-              <tr><td>42</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-flash</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>59,447</td><td>13.0</td><td>4.58</td></tr>
-              <tr><td>43</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B-Instruct</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>10,655</td><td>7.5</td><td>4.35</td></tr>
-              <tr><td>44</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B-Instruct</b><br><span style="font-size: 12px; color: #858383;">Qwen</span></td><td>Open-Source</td><td>9,233</td><td>6.0</td><td>3.16</td></tr>
-              <tr data-selected="true"><td>45</td><td style="text-align: left; padding-left: 10px;"><b>gpt-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>947</td><td>3.5</td><td>3.11</td></tr>
-              <tr><td>46</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-flash-lite</b><br><span style="font-size: 12px; color: #858383;">Gemini</span></td><td>Commercial</td><td>61,040</td><td>1.0</td><td>-7.52</td></tr>
+              <!-- Rows are dynamically generated from CSV -->
             </tbody>
           </table>
         </div>
@@ -630,76 +581,166 @@
     });
   }
 
-  // Inject model logos into leaderboard
-  document.addEventListener('DOMContentLoaded', () => {
-    const logoMap = {
-      'Gemini': 'gemini-color.svg',
-      'Google': 'gemini-color.svg',
-      'OpenAI': 'openai.svg',
-      'DeepSeek': 'deepseek_logo.svg',
-      'Kimi': 'kimi.svg',
-      'Qwen': 'qwen-color.svg',
-      'Alibaba': 'qwen-color.svg',
-      'NVIDIA': 'nvidia-color.svg',
-      'AceReason': 'nvidia-color.svg',
-      'Grok': 'grok.svg',
-      'MiniMax': 'minimax-color.svg',
-      'Claude': 'claude_logo.svg',
-      'Z.ai': 'zai.svg',
-      'GLM': 'zai.svg',
-    };
-    document.querySelectorAll('#results-math td, #results-coding td').forEach(td => {
-      const span = td.querySelector('span');
-      if (!span) return;
-      const family = span.textContent.trim();
-      // Hide the family label and preceding <br>
-      span.style.display = 'none';
-      const br = span.previousElementSibling || span.previousSibling;
-      if (br && br.nodeName === 'BR') br.remove();
-      const logo = logoMap[family];
-      if (!logo) return;
+  // ── Configuration ──────────────────────────────────────────────────
+  // To add a new model: just add a row to static/data/top200_model_performance.csv
+  // To mark it as a "core" model shown by default: add its CSV name here
+  const SELECTED_MODELS = new Set([
+    'gemini-3.1-pro-preview', 'gemini-3-pro-preview', 'Kimi-K2.5',
+    'gemini-3-flash-preview', 'Qwen3.5-397B-A17B-FP8', 'Qwen3.5-122B-A10B',
+    'gpt-5.2_high', 'gpt-5.2_medium', 'GLM-5',
+    'Kimi-K2-Thinking', 'DeepSeek-V3.2-Thinking', 'o4-mini_high',
+    'gemini-2.5-pro', 'Qwen3-235B-A22B-Thinking-2507',
+    'DeepSeek-R1', 'gpt-4.1', 'gpt-4o',
+  ]);
+
+  // Display name overrides (CSV name → display name)
+  const DISPLAY_NAMES = {
+    'gemini-3.1-pro-preview': 'gemini-3.1-pro',
+    'gemini-3-pro-preview': 'gemini-3-pro',
+    'gemini-3-flash-preview': 'gemini-3-flash',
+    'Qwen3.5-397B-A17B-FP8': 'Qwen3.5-397B-A17B',
+    'gpt-5.2_high': 'gpt-5.2 (high)',
+    'gpt-5.2_medium': 'gpt-5.2 (medium)',
+    'gpt-5.2_low': 'gpt-5.2 (low)',
+    'gpt-5-mini_high': 'gpt-5-mini (high)',
+    'gpt-5-mini_medium': 'gpt-5-mini (medium)',
+    'gpt-5-mini_low': 'gpt-5-mini (low)',
+    'o4-mini_high': 'o4-mini (high)',
+    'o4-mini_medium': 'o4-mini (medium)',
+    'o4-mini_low': 'o4-mini (low)',
+    'o3-mini_high': 'o3-mini (high)',
+    'o3-mini_medium': 'o3-mini (medium)',
+    'o3-mini_low': 'o3-mini (low)',
+    'Qwen3-235B-A22B-Thinking-2507': 'Qwen3-235B-A22B-Thinking',
+    'Qwen3-235B-A22B-Instruct-2507': 'Qwen3-235B-A22B-Instruct',
+    'Qwen3-30B-A3B-Thinking-2507': 'Qwen3-30B-A3B-Thinking',
+    'Qwen3-30B-A3B-Instruct-2507': 'Qwen3-30B-A3B-Instruct',
+    'Qwen3-4B-Thinking-2507': 'Qwen3-4B-Thinking',
+    'Qwen3-4B-Instruct-2507': 'Qwen3-4B-Instruct',
+    'Kimi-K2-Instruct-0905': 'Kimi-K2-Instruct',
+  };
+
+  const LOGO_MAP = {
+    'Gemini': 'gemini-color.svg',
+    'Google': 'gemini-color.svg',
+    'OpenAI': 'openai.svg',
+    'DeepSeek': 'deepseek_logo.svg',
+    'Kimi': 'kimi.svg',
+    'Qwen': 'qwen-color.svg',
+    'Alibaba': 'qwen-color.svg',
+    'NVIDIA': 'nvidia-color.svg',
+    'AceReason': 'nvidia-color.svg',
+    'Grok': 'grok.svg',
+    'MiniMax': 'minimax-color.svg',
+    'Claude': 'claude_logo.svg',
+    'Z.ai': 'zai.svg',
+    'GLM': 'zai.svg',
+  };
+
+  // ── CSV loading & table generation ─────────────────────────────────
+  function parseCSV(text) {
+    const lines = text.replace(/\r/g, '').trim().split('\n');
+    return lines.slice(1).map(line => {
+      const cols = line.split(',');
+      return {
+        model: cols[0],
+        category: cols[1],
+        license: cols[2],
+        accuracy: parseFloat(cols[3]),
+        avgTokens: parseInt(cols[4]),
+        correct: parseInt(cols[5]),
+        total: parseInt(cols[6]),
+        ockScore: parseFloat(cols[7]),
+      };
+    });
+  }
+
+  function formatNumber(n) {
+    return n.toLocaleString('en-US');
+  }
+
+  function buildRow(entry) {
+    const displayName = DISPLAY_NAMES[entry.model] || entry.model;
+    const isSelected = SELECTED_MODELS.has(entry.model);
+    const tr = document.createElement('tr');
+    if (isSelected) tr.dataset.selected = 'true';
+
+    // # (placeholder, updated by updateRowNumbers)
+    const tdRank = document.createElement('td');
+    tdRank.textContent = '0';
+    tr.appendChild(tdRank);
+
+    // Model name + category
+    const tdModel = document.createElement('td');
+    tdModel.style.cssText = 'text-align:left;padding-left:10px;';
+    const logo = LOGO_MAP[entry.category];
+    if (logo) {
       const img = document.createElement('img');
       img.src = 'static/images/logos/' + logo;
-      img.alt = family;
+      img.alt = entry.category;
       img.style.cssText = 'height:1.1em;width:1.1em;vertical-align:middle;margin-right:5px;';
-      const b = td.querySelector('b');
-      if (b) b.parentNode.insertBefore(img, b);
-    });
-  });
-
-  // Style license cells as colored pills
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('#results-math tbody tr, #results-coding tbody tr').forEach(row => {
-      const td = row.querySelectorAll('td')[2];
-      if (!td) return;
-      const text = td.textContent.trim();
-      const isCommercial = text === 'Commercial';
-      const tag = document.createElement('span');
-      tag.textContent = isCommercial ? 'Commercial' : 'Open-Source';
-      tag.style.cssText = isCommercial
-        ? 'background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:9999px;padding:2px 10px;font-size:12px;white-space:nowrap;'
-        : 'background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:9999px;padding:2px 10px;font-size:12px;white-space:nowrap;';
-      td.textContent = '';
-      td.appendChild(tag);
-    });
-  });
-
-  // Navbar burger toggle
-  document.addEventListener('DOMContentLoaded', () => {
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-    if ($navbarBurgers.length > 0) {
-      $navbarBurgers.forEach( el => {
-        el.addEventListener('click', () => {
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);
-          el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
-        });
-      });
+      tdModel.appendChild(img);
     }
-  });
+    const b = document.createElement('b');
+    b.textContent = displayName;
+    tdModel.appendChild(b);
+    tr.appendChild(tdModel);
 
-  // Toggle selected/all models + license filter
+    // License pill
+    const tdLicense = document.createElement('td');
+    const isCommercial = entry.license === 'Commercial';
+    const pill = document.createElement('span');
+    pill.textContent = entry.license;
+    pill.style.cssText = isCommercial
+      ? 'background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:9999px;padding:2px 10px;font-size:12px;white-space:nowrap;'
+      : 'background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:9999px;padding:2px 10px;font-size:12px;white-space:nowrap;';
+    tdLicense.appendChild(pill);
+    tr.appendChild(tdLicense);
+
+    // Avg Tokens
+    const tdTokens = document.createElement('td');
+    tdTokens.textContent = formatNumber(entry.avgTokens);
+    tr.appendChild(tdTokens);
+
+    // Accuracy
+    const tdAcc = document.createElement('td');
+    tdAcc.textContent = entry.accuracy.toFixed(1);
+    tr.appendChild(tdAcc);
+
+    // OckScore
+    const tdScore = document.createElement('td');
+    tdScore.textContent = entry.ockScore.toFixed(2);
+    tr.appendChild(tdScore);
+
+    return tr;
+  }
+
+  let totalModelCount = 0;
+
+  async function loadLeaderboard() {
+    const resp = await fetch('static/data/top200_model_performance.csv');
+    const text = await resp.text();
+    const data = parseCSV(text);
+    data.sort((a, b) => b.ockScore - a.ockScore);
+
+    totalModelCount = data.length;
+    const tbody = document.querySelector('#results-math tbody');
+    const fragment = document.createDocumentFragment();
+    data.forEach(entry => fragment.appendChild(buildRow(entry)));
+    tbody.appendChild(fragment);
+
+    // Update all model count references
+    document.getElementById('toggle-models-btn').textContent = `Show all ${totalModelCount} models ▾`;
+    document.querySelectorAll('.model-count').forEach(el => el.textContent = totalModelCount);
+    document.querySelectorAll('.metric-value').forEach(el => {
+      const title = el.parentElement?.querySelector('.metric-title');
+      if (title && title.textContent.includes('Models Evaluated')) el.textContent = totalModelCount;
+    });
+
+    applyFilters();
+  }
+
+  // ── Toggle & filter ────────────────────────────────────────────────
   let showingAll = false;
   let licenseFilter = 'all';
 
@@ -715,7 +756,8 @@
 
   window.toggleLeaderboard = function() {
     showingAll = !showingAll;
-    document.getElementById('toggle-models-btn').textContent = showingAll ? 'Show fewer ▴' : 'Show all 50 models ▾';
+    document.getElementById('toggle-models-btn').textContent =
+      showingAll ? 'Show fewer ▴' : `Show all ${totalModelCount} models ▾`;
     applyFilters();
   };
 
@@ -739,26 +781,38 @@
     applyFilters();
   };
 
-  // Initialize: show selected only
-  applyFilters();
+  function updateRowNumbers(tableId) {
+    let rank = 0;
+    document.querySelectorAll(`#${tableId} tbody tr`).forEach(row => {
+      if (row.style.display !== 'none') {
+        rank++;
+        row.querySelector('td').innerText = rank;
+      }
+    });
+  }
 
-  // Tab switching for leaderboard
+  // ── Initialization ─────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
+    loadLeaderboard();
+
+    // Navbar burger toggle
+    document.querySelectorAll('.navbar-burger').forEach(el => {
+      el.addEventListener('click', () => {
+        const $target = document.getElementById(el.dataset.target);
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+
+    // Tab switching for leaderboard
     const tabs = document.querySelectorAll('.tabs li');
     const mathTable = document.getElementById('math-table');
     const codingTable = document.getElementById('coding-table');
-    
     tabs.forEach(tab => {
       tab.addEventListener('click', (e) => {
         e.preventDefault();
-        
-        // Remove active class from all tabs
         tabs.forEach(t => t.classList.remove('is-active'));
-        
-        // Add active class to clicked tab
         tab.classList.add('is-active');
-        
-        // Show/hide tables
         const tabType = tab.getAttribute('data-tab');
         if (tabType === 'math') {
           mathTable.style.display = 'block';
@@ -769,35 +823,13 @@
         }
       });
     });
-  });
 
-  // Update row numbers on sort for both tables
-  document.addEventListener("DOMContentLoaded", function() {
-    updateRowNumbers('results-math');
-    updateRowNumbers('results-coding');
-    
-    const mathTable = document.querySelector("#results-math");
-    const codingTable = document.querySelector("#results-coding");
-    
-    if (mathTable) {
-      mathTable.addEventListener("click", function() {
-        setTimeout(() => updateRowNumbers('results-math'), 100);
-      });
-    }
-    
-    if (codingTable) {
-      codingTable.addEventListener("click", function() {
-        setTimeout(() => updateRowNumbers('results-coding'), 100);
-      });
-    }
+    // Re-number rows after column sort
+    const mathTableEl = document.querySelector('#results-math');
+    const codingTableEl = document.querySelector('#results-coding');
+    if (mathTableEl) mathTableEl.addEventListener('click', () => setTimeout(() => updateRowNumbers('results-math'), 100));
+    if (codingTableEl) codingTableEl.addEventListener('click', () => setTimeout(() => updateRowNumbers('results-coding'), 100));
   });
-
-  function updateRowNumbers(tableId) {
-    const rows = document.querySelectorAll(`#${tableId} tbody tr`);
-    rows.forEach((row, index) => {
-      row.querySelector("td").innerText = index + 1;
-    });
-  }
 </script>
 
 </body>
