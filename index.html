@@ -186,7 +186,7 @@
             <li><strong>Optimization Pathways:</strong> We demonstrate that efficiency is tractable — both training-free model interpolation and difficulty-aware RL significantly improve OckScore</li>
           </ul>
           <p>
-            Through extensive evaluations on <span class="model-count">37</span> frontier and open-source models, we find that top open-source models have nearly closed the accuracy gap but consume up to <strong>26× more tokens</strong> than commercial counterparts for comparable accuracy. Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating Per-Token Intelligence as the next key axis of LLM evaluation.
+            Through extensive evaluations on <span class="model-count">52</span> frontier and open-source model settings, we find that top open-source models have nearly closed the accuracy gap but consume up to <strong>26× more tokens</strong> than commercial counterparts for comparable accuracy. Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating Per-Token Intelligence as the next key axis of LLM evaluation.
           </p>
           
           <!-- Bubble Plot: Hero Figure -->
@@ -194,7 +194,7 @@
             <figure style="text-align: center;">
               <img src="static/images/bubble_plot.png" alt="Accuracy vs. Token Consumption for all evaluated models" style="width: 90%; max-width: 900px; height: auto; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);">
               <figcaption style="margin-top: 12px; font-size: 14px; color: #64748b; max-width: 750px; margin-left: auto; margin-right: auto;">
-                Accuracy vs. Average Tokens across <span class="model-count">37</span> evaluated models. Models in the upper-left corner are ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
+                Accuracy vs. Average Tokens across <span class="model-count">52</span> evaluated model settings. Models in the upper-left corner are ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
               </figcaption>
             </figure>
           </div>
@@ -203,20 +203,20 @@
           <div class="columns is-centered" style="margin-top: 50px;">
             <div class="column is-one-third" style="padding: 12px 16px;">
               <div class="box" style="min-height: 200px; text-align: left;">
-                <h4 class="title is-5" style="color: #2563eb; margin-bottom: 10px;">OpenAI Owns the Frontier</h4>
-                <p style="font-size: 14px; color: #475569;">GPT-5.5 (medium) tops OckBench at an OckScore of <strong>82.2</strong> — 86% accuracy in just <strong>4,692</strong> tokens. The top eight settings are all GPT-5.x or Claude Opus; no open-weight model reaches the top ten.</p>
+                <h4 class="title is-5" style="color: #2563eb; margin-bottom: 10px;">Closed Models Own the Frontier</h4>
+                <p style="font-size: 14px; color: #475569;">GPT-5.5 (medium) still leads at <strong>82.2</strong> OckScore, while Claude Opus 4.8 (xhigh) is second at <strong>81.6</strong> with 91.5% accuracy. The top ten settings are all GPT-5.x or Claude Opus.</p>
               </div>
             </div>
             <div class="column is-one-third" style="padding: 12px 16px;">
               <div class="box" style="min-height: 200px; text-align: left;">
                 <h4 class="title is-5" style="color: #2563eb; margin-bottom: 10px;">Open vs. Closed Gap</h4>
-                <p style="font-size: 14px; color: #475569;">Kimi-K2.6 matches GPT-5.5 (low) at <strong>75.0%</strong> accuracy but spends <strong>26× more tokens</strong> (42,243 vs 1,603). Open weights have closed the accuracy gap — not the per-token-intelligence gap.</p>
+                <p style="font-size: 14px; color: #475569;">DeepSeek-V4-Pro (high) reaches <strong>84.0%</strong>, within two points of GPT-5.5 (medium), but uses <strong>9.3× more tokens</strong> (43,652 vs 4,692). Open weights are close on accuracy, not yet on efficiency.</p>
               </div>
             </div>
             <div class="column is-one-third" style="padding: 12px 16px;">
               <div class="box" style="min-height: 200px; text-align: left;">
                 <h4 class="title is-5" style="color: #2563eb; margin-bottom: 10px;">The Overthinking Tax</h4>
-                <p style="font-size: 14px; color: #475569;">In the Qwen3.5 family, the 9B model burns <strong>116,222</strong> tokens for 21.5% accuracy, while the 397B model scores 67.5% using <strong>4.4× fewer</strong> tokens. Bigger models are both smarter and leaner.</p>
+                <p style="font-size: 14px; color: #475569;">DeepSeek-V4-Pro scores the same <strong>84.0%</strong> at high and max effort, but max uses <strong>1.9× more tokens</strong> (81,408 vs 43,652), dropping OckScore from 67.20 to 61.87.</p>
               </div>
             </div>
           </div>
@@ -234,7 +234,7 @@
         <h2 class="title is-3" id="leaderboard">Leaderboard</h2>
         <div class="content">
           <p class="mt-3">
-            Performance of various LLMs on <strong>OckBench (Selected)</strong> — 200 problems (100 math + 60 coding + 40 science). Models are ranked by <strong>OckScore</strong> = Accuracy − 10 × ln(AvgTokens / 10,000 + 1) — higher is better. All models evaluated single-shot with greedy decoding (temperature = 0); math accuracy is graded by an LLM judge.
+            Performance of various LLMs on <strong>OckBench (Selected)</strong> — 200 problems (100 math + 60 coding + 40 science). Models are ranked by <strong>OckScore</strong> = Accuracy − 10 × ln(AvgTokens / 10,000 + 1) — higher is better. Sampling follows each model's validated evaluation configuration, and math accuracy is graded by an LLM judge. MiniMax-M2.7 is the equal-weight pooled average of four InfiniAI requested effort-label runs (800 model-problem observations).
           </p>
           <div style="margin-top: 12px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
             <button id="toggle-models-btn" class="button is-small is-rounded is-light" onclick="toggleLeaderboard()" style="font-size: 13px; color: #2563eb; border-color: #2563eb;">
@@ -382,8 +382,8 @@
           </div>
           <div class="column is-one-quarter">
             <div class="metric-card">
-              <div class="metric-title">Models Evaluated</div>
-              <div class="metric-value">37</div>
+              <div class="metric-title">Settings Evaluated</div>
+              <div class="metric-value">52</div>
             </div>
           </div>
         </div>
@@ -508,12 +508,12 @@
         <div class="content has-text-centered">
           <div style="max-width: 800px; margin: 0 auto; text-align: left;">
             <ul>
-              <li><strong>OpenAI owns the efficiency frontier:</strong> GPT-5.5 (medium) tops OckBench with an OckScore of 82.15 — 86.0% accuracy in just 4,692 tokens. The top eight settings are all GPT-5.x or Claude Opus, and no open-weight model reaches the top ten.</li>
-              <li><strong>Open-source accuracy ≈ commercial, but efficiency lags:</strong> Kimi-K2.6 matches GPT-5.5 (low) at 75.0% accuracy yet spends <strong>26× more tokens</strong> (42,243 vs 1,603); DeepSeek-V4-Flash edges out GPT-5.4 (medium) on accuracy (82.5% vs 82.0%) but again at ~26× the tokens. The accuracy gap has nearly closed; the per-token-intelligence gap has not.</li>
+              <li><strong>Closed models own the efficiency frontier:</strong> GPT-5.5 (medium) remains first at 82.15 OckScore, and Claude Opus 4.8 (xhigh) enters second at 81.61 with the highest accuracy in the table (91.5%). The top ten settings are all GPT-5.x or Claude Opus; the best open-weight setting ranks 16th.</li>
+              <li><strong>Open-source accuracy is close, but efficiency still lags:</strong> DeepSeek-V4-Pro (high) reaches 84.0%, within two points of GPT-5.5 (medium), but spends <strong>9.3× more tokens</strong> (43,652 vs 4,692). The accuracy gap has nearly closed; the per-token-intelligence gap has not.</li>
               <li><strong>The Overthinking Tax:</strong> In the Qwen3.5 family, larger models are both smarter <em>and</em> leaner — Qwen3.5-9B burns 116,222 tokens for 21.5% accuracy (last place at OckScore −3.85), while Qwen3.5-397B-A17B reaches 67.5% using <strong>4.4× fewer</strong> tokens. Smaller models over-generate to compensate for lower capacity.</li>
-              <li><strong>More thinking isn't always worth it:</strong> Sweeping GPT-5.5's reasoning effort lifts raw accuracy monotonically (none 26% → xhigh 90%), but OckScore peaks at <em>medium</em> (82.15) and falls at high/xhigh — the final +4 accuracy points (86% → 90%) cost 2.8× the tokens (4,692 → 13,271).</li>
-              <li><strong>Frontier generations co-optimize both axes:</strong> Claude Opus 4.7 nearly matches 4.6's accuracy (83.0% vs 84.5%) at <strong>3.8× fewer</strong> tokens (7,481 vs 28,582), lifting OckScore 71.0 → 77.4; Gemini 3.1 Pro improves on 2.5 Pro by +22.5 accuracy points <em>and</em> 6.4× fewer tokens. Each generation pushes up-and-left.</li>
-              <li><strong>Verbosity can sink a capable model:</strong> MiniMax-M2.5 answers 44.5% correctly but, at 57,346 tokens, scores below GPT-5.5 with reasoning off (26.0% accuracy, 260 tokens) on OckScore (25.43 vs 25.74). Token cost — not correctness alone — decides deployment value.</li>
+              <li><strong>More effort is not monotonically better:</strong> Claude Opus 4.8 peaks at xhigh (91.5%, OckScore 81.61). Moving to max lowers accuracy to 90.0% while more than doubling tokens (16,876 → 36,544), dropping OckScore to 74.62.</li>
+              <li><strong>Inference configuration can dominate the result:</strong> GLM-5.2 (max) rises from 53.5% at temperature 0 to 83.5% with the vendor evaluation sampling recipe, lifting OckScore from 38.40 to 67.16.</li>
+              <li><strong>MiniMax-M2.7 is reported as a repeated-run average:</strong> its row pools minimal/low/medium/high requested labels to 66.875% accuracy, 35,538 average output tokens, and 51.72 OckScore. The labels were accepted by the gateway but are not presented as a verified reasoning-depth ladder.</li>
             </ul>
           </div>
         </div>
@@ -580,9 +580,10 @@
   // To mark it as a "core" model shown by default: add its CSV name here
   const SELECTED_MODELS = new Set([
     'gpt-5.5-medium', 'gpt-5.5-high', 'gpt-5.4-medium',
-    'opus-4.7-xhigh', 'opus-4.6', 'gemini-3.1-pro-preview',
-    'deepseek-v4-flash', 'kimi-k2.6', 'qwen3.5-397b-a17b',
-    'minimax-m2.7', 'mimo-v2.5-pro-thinking', 'glm-5.1',
+    'opus-4.8-xhigh', 'opus-4.8-medium', 'opus-4.7-xhigh',
+    'opus-4.6', 'gemini-3.1-pro-preview', 'deepseek-v4-pro-high',
+    'deepseek-v4-flash-high', 'glm-5.2-max-t1', 'kimi-k2.6',
+    'qwen3.5-397b-a17b', 'minimax-m2.7', 'mimo-v2.5-pro-thinking', 'glm-5.1',
     'sonnet-4.6', 'gemma-4-31b-it', 'qwen3.6-27b', 'gemini-2.5-pro',
   ]);
 
@@ -598,6 +599,11 @@
     'gpt-5.4-medium': 'GPT-5.4 (medium)',
     'gpt-5.4-high': 'GPT-5.4 (high)',
     'opus-4.7-xhigh': 'Claude Opus 4.7 (xhigh)',
+    'opus-4.8-low': 'Claude Opus 4.8 (low)',
+    'opus-4.8-medium': 'Claude Opus 4.8 (medium)',
+    'opus-4.8-high': 'Claude Opus 4.8 (high)',
+    'opus-4.8-xhigh': 'Claude Opus 4.8 (xhigh)',
+    'opus-4.8-max': 'Claude Opus 4.8 (max)',
     'opus-4.6': 'Claude Opus 4.6',
     'opus-4.5': 'Claude Opus 4.5',
     'sonnet-4.6': 'Claude Sonnet 4.6',
@@ -607,14 +613,24 @@
     'gemini-3-flash-preview': 'Gemini 3 Flash',
     'gemini-2.5-pro': 'Gemini 2.5 Pro',
     'gemini-2.5-flash': 'Gemini 2.5 Flash',
-    'deepseek-v4-flash': 'DeepSeek-V4-Flash',
-    'deepseek-v4-pro': 'DeepSeek-V4-Pro',
+    'deepseek-v4-flash-none': 'DeepSeek-V4-Flash (none)',
+    'deepseek-v4-flash-high': 'DeepSeek-V4-Flash (high)',
+    'deepseek-v4-flash-max': 'DeepSeek-V4-Flash (max)',
+    'deepseek-v4-pro-none': 'DeepSeek-V4-Pro (none)',
+    'deepseek-v4-pro-high': 'DeepSeek-V4-Pro (high)',
+    'deepseek-v4-pro-max': 'DeepSeek-V4-Pro (max)',
     'kimi-k2.6': 'Kimi-K2.6',
     'kimi-k2.5': 'Kimi-K2.5',
-    'minimax-m2.7': 'MiniMax-M2.7',
+    'minimax-m2.7': 'MiniMax-M2.7 (4-label avg)',
     'minimax-m2.5': 'MiniMax-M2.5',
     'glm-5.1': 'GLM-5.1',
     'glm-5': 'GLM-5',
+    'glm-5.2-off': 'GLM-5.2 (off, T=0)',
+    'glm-5.2-high': 'GLM-5.2 (high, T=0)',
+    'glm-5.2-max': 'GLM-5.2 (max, T=0)',
+    'glm-5.2-off-t1': 'GLM-5.2 (off, vendor sampling)',
+    'glm-5.2-high-t1': 'GLM-5.2 (high, vendor sampling)',
+    'glm-5.2-max-t1': 'GLM-5.2 (max, vendor sampling)',
     'mimo-v2.5-pro-thinking': 'MiMo-V2.5-Pro',
     'mimo-v2.5-thinking': 'MiMo-V2.5',
     'qwen-235b': 'Qwen-235B',
@@ -737,11 +753,11 @@
     tbody.appendChild(fragment);
 
     // Update all model count references
-    document.getElementById('toggle-models-btn').textContent = `Show all ${totalModelCount} models ▾`;
+    document.getElementById('toggle-models-btn').textContent = `Show all ${totalModelCount} settings ▾`;
     document.querySelectorAll('.model-count').forEach(el => el.textContent = totalModelCount);
     document.querySelectorAll('.metric-value').forEach(el => {
       const title = el.parentElement?.querySelector('.metric-title');
-      if (title && title.textContent.includes('Models Evaluated')) el.textContent = totalModelCount;
+      if (title && title.textContent.includes('Settings Evaluated')) el.textContent = totalModelCount;
     });
 
     applyFilters();
@@ -764,7 +780,7 @@
   window.toggleLeaderboard = function() {
     showingAll = !showingAll;
     document.getElementById('toggle-models-btn').textContent =
-      showingAll ? 'Show fewer ▴' : `Show all ${totalModelCount} models ▾`;
+      showingAll ? 'Show fewer ▴' : `Show all ${totalModelCount} settings ▾`;
     applyFilters();
   };
 
@@ -841,4 +857,3 @@
 
 </body>
 </html>
-
