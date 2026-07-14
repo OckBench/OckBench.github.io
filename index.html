@@ -186,7 +186,7 @@
             <li><strong>Optimization Pathways:</strong> We demonstrate that efficiency is tractable — both training-free model interpolation and difficulty-aware RL significantly improve OckScore</li>
           </ul>
           <p>
-            Through extensive evaluations on <span class="model-count">52</span> frontier and open-source model settings, we find that top open-source models have nearly closed the accuracy gap but consume up to <strong>26× more tokens</strong> than commercial counterparts for comparable accuracy. Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating Per-Token Intelligence as the next key axis of LLM evaluation.
+            Through extensive evaluations on <span class="model-count">49</span> frontier and open-source model settings, we find that top open-source models have nearly closed the accuracy gap but consume up to <strong>26× more tokens</strong> than commercial counterparts for comparable accuracy. Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating Per-Token Intelligence as the next key axis of LLM evaluation.
           </p>
           
           <!-- Bubble Plot: Hero Figure -->
@@ -194,7 +194,7 @@
             <figure style="text-align: center;">
               <img src="static/images/bubble_plot.png" alt="Accuracy vs. Token Consumption for all evaluated models" style="width: 90%; max-width: 900px; height: auto; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);">
               <figcaption style="margin-top: 12px; font-size: 14px; color: #64748b; max-width: 750px; margin-left: auto; margin-right: auto;">
-                Accuracy vs. Average Tokens across <span class="model-count">52</span> evaluated model settings. Models in the upper-left corner are ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
+                Accuracy vs. Average Tokens across <span class="model-count">49</span> evaluated model settings. Models in the upper-left corner are ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
               </figcaption>
             </figure>
           </div>
@@ -383,7 +383,7 @@
           <div class="column is-one-quarter">
             <div class="metric-card">
               <div class="metric-title">Settings Evaluated</div>
-              <div class="metric-value">52</div>
+              <div class="metric-value">49</div>
             </div>
           </div>
         </div>
@@ -512,7 +512,7 @@
               <li><strong>Open-source accuracy is close, but efficiency still lags:</strong> DeepSeek-V4-Pro (high) reaches 84.0%, within two points of GPT-5.5 (medium), but spends <strong>9.3× more tokens</strong> (43,652 vs 4,692). The accuracy gap has nearly closed; the per-token-intelligence gap has not.</li>
               <li><strong>The Overthinking Tax:</strong> In the Qwen3.5 family, larger models are both smarter <em>and</em> leaner — Qwen3.5-9B burns 116,222 tokens for 21.5% accuracy (last place at OckScore −3.85), while Qwen3.5-397B-A17B reaches 67.5% using <strong>4.4× fewer</strong> tokens. Smaller models over-generate to compensate for lower capacity.</li>
               <li><strong>More effort is not monotonically better:</strong> Claude Opus 4.8 peaks at xhigh (91.5%, OckScore 81.61). Moving to max lowers accuracy to 90.0% while more than doubling tokens (16,876 → 36,544), dropping OckScore to 74.62.</li>
-              <li><strong>Inference configuration can dominate the result:</strong> GLM-5.2 (max) rises from 53.5% at temperature 0 to 83.5% with the vendor evaluation sampling recipe, lifting OckScore from 38.40 to 67.16.</li>
+              <li><strong>Open-weight leaders are tightly matched:</strong> DeepSeek-V4-Pro (high) reaches 84.0% at 43,652 tokens and 67.20 OckScore, while GLM-5.2 (max) reaches 83.5% at 41,234 tokens and 67.16 OckScore.</li>
               <li><strong>MiniMax-M2.7 is reported as a repeated-run average:</strong> its row pools minimal/low/medium/high requested labels to 66.875% accuracy, 35,538 average output tokens, and 51.72 OckScore. The labels were accepted by the gateway but are not presented as a verified reasoning-depth ladder.</li>
             </ul>
           </div>
@@ -582,7 +582,7 @@
     'gpt-5.5-medium', 'gpt-5.5-high', 'gpt-5.4-medium',
     'opus-4.8-xhigh', 'opus-4.8-medium', 'opus-4.7-xhigh',
     'opus-4.6', 'gemini-3.1-pro-preview', 'deepseek-v4-pro-high',
-    'deepseek-v4-flash-high', 'glm-5.2-max-t1', 'kimi-k2.6',
+    'deepseek-v4-flash-high', 'glm-5.2-max', 'kimi-k2.6',
     'qwen3.5-397b-a17b', 'minimax-m2.7', 'mimo-v2.5-pro-thinking', 'glm-5.1',
     'sonnet-4.6', 'gemma-4-31b-it', 'qwen3.6-27b', 'gemini-2.5-pro',
   ]);
@@ -621,16 +621,13 @@
     'deepseek-v4-pro-max': 'DeepSeek-V4-Pro (max)',
     'kimi-k2.6': 'Kimi-K2.6',
     'kimi-k2.5': 'Kimi-K2.5',
-    'minimax-m2.7': 'MiniMax-M2.7 (4-label avg)',
+    'minimax-m2.7': 'MiniMax-M2.7',
     'minimax-m2.5': 'MiniMax-M2.5',
     'glm-5.1': 'GLM-5.1',
     'glm-5': 'GLM-5',
-    'glm-5.2-off': 'GLM-5.2 (off, T=0)',
-    'glm-5.2-high': 'GLM-5.2 (high, T=0)',
-    'glm-5.2-max': 'GLM-5.2 (max, T=0)',
-    'glm-5.2-off-t1': 'GLM-5.2 (off, vendor sampling)',
-    'glm-5.2-high-t1': 'GLM-5.2 (high, vendor sampling)',
-    'glm-5.2-max-t1': 'GLM-5.2 (max, vendor sampling)',
+    'glm-5.2-off': 'GLM-5.2 (off)',
+    'glm-5.2-high': 'GLM-5.2 (high)',
+    'glm-5.2-max': 'GLM-5.2 (max)',
     'mimo-v2.5-pro-thinking': 'MiMo-V2.5-Pro',
     'mimo-v2.5-thinking': 'MiMo-V2.5',
     'qwen-235b': 'Qwen-235B',
