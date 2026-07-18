@@ -1,858 +1,334 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="OckBench: The first benchmark measuring decoding token efficiency alongside accuracy for LLM reasoning. Tokens are not to be multiplied without necessity.">
   <meta name="keywords" content="OckBench, LLM, Token Efficiency, Reasoning Benchmark, Ockham's Razor, Decoding Efficiency">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OckBench: Measuring the Efficiency of LLM Reasoning">
+  <meta property="og:description" content="The first model- and hardware-agnostic benchmark that jointly measures accuracy and decoding-token efficiency. Tokens are not to be multiplied without necessity.">
+  <meta property="og:image" content="static/images/bubble_plot.png">
+  <meta name="twitter:card" content="summary_large_image">
   <title>OckBench: Measuring the Efficiency of LLM Reasoning</title>
 
-  <link rel="icon" href="./static/images/ockbench-logo.svg">
+  <link rel="icon" href="static/images/ockbench-logo.svg" type="image/svg+xml">
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="stylesheet" href="./static/css/leaderboard.css">
-
-  <script type="text/javascript" src="static/js/sort-table.js" defer></script>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-
-  <script src="./static/data/leaderboard_data.js" defer></script>
-
-  <style>
-    .no-sort {
-        cursor: default;
-        pointer-events: none;
-        background-image: none !important;
-    }
-    .ockbench {
-      font-weight: bold;
-      color: #2563eb;
-    }
-    .metric-card {
-      background: #f8fafc;
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 20px;
-      margin: 10px;
-      text-align: center;
-    }
-    .metric-title {
-      font-size: 14px;
-      color: #64748b;
-      margin-bottom: 8px;
-    }
-    .metric-value {
-      font-size: 32px;
-      font-weight: bold;
-      color: #2563eb;
-    }
-  </style>
-
+  <link rel="stylesheet" href="static/css/ock.css">
+  <script src="static/js/ock.js" defer></script>
 </head>
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-</nav>
+  <a class="skip-link" href="#leaderboard">Skip to the leaderboard</a>
 
+  <header class="masthead">
+    <div class="container">
+      <p class="kicker">arXiv:2511.05722 &middot; 2025</p>
+      <img class="device" src="static/images/ockbench-logo.svg" alt="" width="40" height="40">
+      <h1 class="title">OckBench</h1>
+      <p class="tagline">Tokens are Not to Be Multiplied without Necessity</p>
 
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title is-bold">
-            <img src="static/images/ockbench-logo.svg" style="width:1.6em;vertical-align: middle" alt="Logo"/>
-            <span class="ockbench" style="vertical-align: middle">OckBench</span>
-          </h1>
-          <h2 class="subtitle is-3 publication-subtitle" style="margin-bottom: 20px;">
-            Tokens are Not to Be Multiplied without Necessity
-          </h2>
-          
-          <div class="is-size-5 publication-authors" style="margin: 20px auto;">
-            <span class="author-block">
-              <a href="#">Zheng Du</a><sup>1*</sup>,
-            </span>
-            <span class="author-block">
-              <a href="#">Hao Kang</a><sup>1*</sup>,
-            </span>
-            <span class="author-block">
-              <a href="#">Song Han</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="#">Tushar Krishna</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="#">Ligeng Zhu</a><sup>3</sup>
-            </span>
-          </div>
-          <div class="is-size-7" style="margin-top: -8px; margin-bottom: 6px;">
-            <span><sup>*</sup>Equal contribution</span>
-          </div>
-          
-          <div class="is-size-6 publication-authors" style="margin: 10px auto;">
-            <span class="author-block" style="margin-right: 2em;"><sup>1</sup>Georgia Institute of Technology</span>
-            <span class="author-block" style="margin-right: 2em;"><sup>2</sup>MIT</span>
-            <span class="author-block"><sup>3</sup>NVIDIA</span>
-          </div>
-          
+      <p class="authors">
+        Zheng&nbsp;Du<sup>1*</sup>, Hao&nbsp;Kang<sup>1*</sup>, Song&nbsp;Han<sup>2</sup>, Tushar&nbsp;Krishna<sup>1</sup>, Ligeng&nbsp;Zhu<sup>3</sup>
+      </p>
+      <p class="equal"><sup>*</sup>Equal contribution</p>
+      <p class="affiliations"><sup>1</sup>Georgia Institute of Technology <span class="dot">&middot;</span> <sup>2</sup>MIT <span class="dot">&middot;</span> <sup>3</sup>NVIDIA</p>
 
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- arXiv Link -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2511.05722" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Code Link -->
-              <span class="link-block">
-                <a href="https://github.com/OckBench/OckBench" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>GitHub</span>
-                </a>
-              </span>
-              <!-- Dataset Link -->
-              <span class="link-block">
-                <a href="https://huggingface.co/datasets/ockbench/ockbench" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <p style="font-size:18px">🤗</p>
-                  </span>
-                  <span>Dataset</span>
-                </a>
-              </span>
-              <!-- Leaderboard Link -->
-              <span class="link-block">
-                <a href="#leaderboard" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <p style="font-size:18px">🏆</p>
-                  </span>
-                  <span>Leaderboard</span>
-                </a>
-              </span>
-            </div>
+      <nav class="links" aria-label="Resources">
+        <a href="https://arxiv.org/abs/2511.05722">arXiv</a>
+        <a href="https://github.com/OckBench/OckBench">GitHub</a>
+        <a href="https://huggingface.co/datasets/ockbench/ockbench">Dataset</a>
+        <a href="#leaderboard">Leaderboard</a>
+      </nav>
+    </div>
+    <div class="container rule-double" aria-hidden="true"></div>
+  </header>
+
+  <main id="main">
+
+    <!-- ── 1. Introduction ─────────────────────────────────────────── -->
+    <section class="section" aria-labelledby="sec-intro">
+      <div class="container">
+        <h2 class="sec-head" id="sec-intro"><span class="sec-num">1.</span> Introduction</h2>
+
+        <blockquote class="epigraph">
+          <p>&ldquo;Entities must not be multiplied beyond necessity.&rdquo;</p>
+          <cite>&mdash;&nbsp;The Principle of Ockham&rsquo;s Razor</cite>
+        </blockquote>
+
+        <p>
+          Large Language Models (LLMs) like GPT-5, Gemini&nbsp;3, and Claude serve as the frontier of automated
+          intelligence, fueled by reasoning techniques like Chain of Thought (CoT). As the field embraces
+          test-time compute scaling, models are increasingly trained to generate extensive token chains to
+          tackle tougher problems. However, this massive inflation of decoding tokens introduces a critical
+          bottleneck: solving just six problems in the International Olympiad in Informatics can now take
+          over ten hours, and complex mathematical challenges frequently explode into millions of tokens.
+        </p>
+        <p>
+          While the community celebrates gains in reasoning capability, prevailing benchmarks like HELM and
+          Chatbot Arena focus almost exclusively on output quality, ignoring this <strong>token efficiency
+          crisis</strong>. In reality, many models consume vastly more tokens than necessary to reach the
+          correct answer. Two models reaching the <strong>same accuracy</strong> can differ by more than
+          <strong>25&times; in tokens generated</strong> &mdash; one answering in ~1,600 tokens where another
+          spends ~42,000. As accuracy on standard tasks approaches saturation, tokens must be treated as a
+          cost &mdash; not a free resource.
+        </p>
+        <p>
+          We introduce <strong>OckBench</strong>, the first model- and hardware-agnostic benchmark that
+          jointly measures accuracy and token efficiency. Our key contributions include:
+        </p>
+
+        <ol class="contributions">
+          <li><strong>Per-Token Intelligence.</strong> We introduce a new evaluation dimension &mdash; a superior model must not only achieve high accuracy but do so with minimal token consumption.</li>
+          <li><strong>OckBench &amp; OckScore.</strong> A benchmark with a novel Differentiation Filter that isolates tasks exposing the efficiency gap, paired with a unified metric that rewards high accuracy achieved with fewer tokens.</li>
+          <li><strong>The Overthinking Tax.</strong> We formally quantify how smaller models often incur paradoxically higher deployment costs due to excessive verbose reasoning chains.</li>
+          <li><strong>Optimization Pathways.</strong> We demonstrate that efficiency is tractable &mdash; both training-free model interpolation and difficulty-aware RL significantly improve OckScore.</li>
+        </ol>
+
+        <p>
+          Through extensive evaluations on <span class="model-count">49</span> frontier and open-source model
+          settings, we find that top open-source models have nearly closed the accuracy gap but consume up to
+          <strong>26&times; more tokens</strong> than commercial counterparts for comparable accuracy.
+          Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating
+          Per-Token Intelligence as the next key axis of LLM evaluation.
+        </p>
+
+        <figure class="figure">
+          <img src="static/images/bubble_plot.png" alt="Scatter plot of accuracy versus average output tokens for all evaluated models; commercial models dominate the upper-left Pareto frontier while open-source models cluster to the right." loading="lazy">
+          <figcaption>
+            <span class="fig-label">Figure&nbsp;1.</span> Accuracy vs. Average Tokens across
+            <span class="model-count">49</span> evaluated model settings. Models in the upper-left corner are
+            ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
+          </figcaption>
+        </figure>
+
+        <h3 class="sub-head">Three observations</h3>
+        <div class="observations">
+          <div class="obs">
+            <h4>Closed models own the frontier</h4>
+            <p>GPT-5.5 (medium) still leads at <strong>82.2</strong> OckScore, while Claude Opus 4.8 (xhigh) is second at <strong>81.6</strong> with 91.5% accuracy. The top ten settings are all GPT-5.x or Claude Opus.</p>
+          </div>
+          <div class="obs">
+            <h4>Open vs. closed gap</h4>
+            <p>DeepSeek-V4-Pro (high) reaches <strong>84.0%</strong>, within two points of GPT-5.5 (medium), but uses <strong>9.3&times; more tokens</strong> (43,652 vs 4,692). Open weights are close on accuracy, not yet on efficiency.</p>
+          </div>
+          <div class="obs">
+            <h4>The overthinking tax</h4>
+            <p>DeepSeek-V4-Pro scores the same <strong>84.0%</strong> at high and max effort, but max uses <strong>1.9&times; more tokens</strong> (81,408 vs 43,652), dropping OckScore from 67.20 to 61.87.</p>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
+    <!-- ── 2. Leaderboard ──────────────────────────────────────────── -->
+    <section class="section" id="leaderboard" aria-labelledby="sec-leaderboard">
+      <div class="container">
+        <h2 class="sec-head" id="sec-leaderboard"><span class="sec-num">2.</span> Leaderboard</h2>
 
+        <p>
+          Performance of various LLMs on <strong>OckBench (Selected)</strong> &mdash; 200 problems
+          (100&nbsp;math + 60&nbsp;coding + 40&nbsp;science). Models are ranked by <strong>OckScore</strong>
+          = Accuracy &minus; 10 &times; ln(AvgTokens / 10,000 + 1) &mdash; higher is better. Sampling follows
+          each model&rsquo;s validated evaluation configuration, and math accuracy is graded by an LLM judge.
+          MiniMax-M2.7 is the equal-weight pooled average of four InfiniAI requested effort-label runs
+          (800 model-problem observations).
+        </p>
 
-<section class="section">
-  <div class="container" style="margin-bottom: 2vh;">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Introduction</h2>
-        <div class="content has-text-justified">
-          <p style="text-align: center; font-style: italic; margin-bottom: 20px;">
-            "Entities must not be multiplied beyond necessity." — The Principle of Ockham's Razor
-          </p>
-          <p>
-            Large Language Models (LLMs) like GPT-5, Gemini 3, and Claude serve as the frontier of automated intelligence, fueled by reasoning techniques like Chain of Thought (CoT). As the field embraces test-time compute scaling, models are increasingly trained to generate extensive token chains to tackle tougher problems. However, this massive inflation of decoding tokens introduces a critical bottleneck: solving just six problems in the International Olympiad in Informatics can now take over ten hours, and complex mathematical challenges frequently explode into millions of tokens.
-          </p>
-          <p>
-            While the community celebrates gains in reasoning capability, prevailing benchmarks like HELM and Chatbot Arena focus almost exclusively on output quality, ignoring this <strong>token efficiency crisis</strong>. In reality, many models consume vastly more tokens than necessary to reach the correct answer. Two models reaching the <strong>same accuracy</strong> can differ by more than <strong>25× in tokens generated</strong> — one answering in ~1,600 tokens where another spends ~42,000. As accuracy on standard tasks approaches saturation, tokens must be treated as a cost — not a free resource.
-          </p>
-          <p>
-            We introduce <strong>OckBench</strong>, the first model- and hardware-agnostic benchmark that jointly measures accuracy and token efficiency. Our key contributions include:
-          </p>
-          <ul style="text-align: left; display: inline-block;">
-            <li><strong>Per-Token Intelligence:</strong> We introduce a new evaluation dimension — a superior model must not only achieve high accuracy but do so with minimal token consumption</li>
-            <li><strong>OckBench &amp; OckScore:</strong> A benchmark with a novel Differentiation Filter that isolates tasks exposing the efficiency gap, paired with a unified metric that rewards high accuracy achieved with fewer tokens</li>
-            <li><strong>The Overthinking Tax:</strong> We formally quantify how smaller models often incur paradoxically higher deployment costs due to excessive verbose reasoning chains</li>
-            <li><strong>Optimization Pathways:</strong> We demonstrate that efficiency is tractable — both training-free model interpolation and difficulty-aware RL significantly improve OckScore</li>
-          </ul>
-          <p>
-            Through extensive evaluations on <span class="model-count">49</span> frontier and open-source model settings, we find that top open-source models have nearly closed the accuracy gap but consume up to <strong>26× more tokens</strong> than commercial counterparts for comparable accuracy. Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating Per-Token Intelligence as the next key axis of LLM evaluation.
-          </p>
-          
-          <!-- Bubble Plot: Hero Figure -->
-          <div style="margin-top: 40px;">
-            <figure style="text-align: center;">
-              <img src="static/images/bubble_plot.png" alt="Accuracy vs. Token Consumption for all evaluated models" style="width: 90%; max-width: 900px; height: auto; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);">
-              <figcaption style="margin-top: 12px; font-size: 14px; color: #64748b; max-width: 750px; margin-left: auto; margin-right: auto;">
-                Accuracy vs. Average Tokens across <span class="model-count">49</span> evaluated model settings. Models in the upper-left corner are ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Three Key Observations -->
-          <div class="columns is-centered" style="margin-top: 50px;">
-            <div class="column is-one-third" style="padding: 12px 16px;">
-              <div class="box" style="min-height: 200px; text-align: left;">
-                <h4 class="title is-5" style="color: #2563eb; margin-bottom: 10px;">Closed Models Own the Frontier</h4>
-                <p style="font-size: 14px; color: #475569;">GPT-5.5 (medium) still leads at <strong>82.2</strong> OckScore, while Claude Opus 4.8 (xhigh) is second at <strong>81.6</strong> with 91.5% accuracy. The top ten settings are all GPT-5.x or Claude Opus.</p>
-              </div>
-            </div>
-            <div class="column is-one-third" style="padding: 12px 16px;">
-              <div class="box" style="min-height: 200px; text-align: left;">
-                <h4 class="title is-5" style="color: #2563eb; margin-bottom: 10px;">Open vs. Closed Gap</h4>
-                <p style="font-size: 14px; color: #475569;">DeepSeek-V4-Pro (high) reaches <strong>84.0%</strong>, within two points of GPT-5.5 (medium), but uses <strong>9.3× more tokens</strong> (43,652 vs 4,692). Open weights are close on accuracy, not yet on efficiency.</p>
-              </div>
-            </div>
-            <div class="column is-one-third" style="padding: 12px 16px;">
-              <div class="box" style="min-height: 200px; text-align: left;">
-                <h4 class="title is-5" style="color: #2563eb; margin-bottom: 10px;">The Overthinking Tax</h4>
-                <p style="font-size: 14px; color: #475569;">DeepSeek-V4-Pro scores the same <strong>84.0%</strong> at high and max effort, but max uses <strong>1.9× more tokens</strong> (81,408 vs 43,652), dropping OckScore from 67.20 to 61.87.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-full has-text-centered content">
-        <h2 class="title is-3" id="leaderboard">Leaderboard</h2>
-        <div class="content">
-          <p class="mt-3">
-            Performance of various LLMs on <strong>OckBench (Selected)</strong> — 200 problems (100 math + 60 coding + 40 science). Models are ranked by <strong>OckScore</strong> = Accuracy − 10 × ln(AvgTokens / 10,000 + 1) — higher is better. Sampling follows each model's validated evaluation configuration, and math accuracy is graded by an LLM judge. MiniMax-M2.7 is the equal-weight pooled average of four InfiniAI requested effort-label runs (800 model-problem observations).
-          </p>
-          <div style="margin-top: 12px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-            <button id="toggle-models-btn" class="button is-small is-rounded is-light" onclick="toggleLeaderboard()" style="font-size: 13px; color: #2563eb; border-color: #2563eb;">
-              Loading models…
-            </button>
-            <button id="filter-all-btn" class="button is-small is-rounded" onclick="filterByLicense('all')" style="font-size: 13px; background: #2563eb; color: #fff; border-color: #2563eb;">
-              All
-            </button>
-            <button id="filter-commercial-btn" class="button is-small is-rounded is-light" onclick="filterByLicense('Commercial')" style="font-size: 13px; color: #64748b; border-color: #cbd5e1;">
-              Commercial
-            </button>
-            <button id="filter-opensource-btn" class="button is-small is-rounded is-light" onclick="filterByLicense('Open-Source')" style="font-size: 13px; color: #64748b; border-color: #cbd5e1;">
-              Open-Source
-            </button>
-          </div>
-          <!-- <p style="font-size: 14px; color: #64748b;">
-            <strong>#Tokens:</strong> Average decoding token count &nbsp;&nbsp;
-            <strong>Accuracy (%):</strong> Percentage of correctly solved problems &nbsp;&nbsp;
-            <strong>Reasoning Efficiency:</strong> #Tokens / Accuracy (lower is better)
-          </p> -->
+        <div class="lb-controls">
+          <div id="license-filter"><button data-filter="all" class="is-active" aria-pressed="true">All</button><button data-filter="Commercial" aria-pressed="false">Commercial</button><button data-filter="Open-Source" aria-pressed="false">Open-Source</button></div>
+          <button id="toggle-models-btn">Loading&hellip;</button>
         </div>
 
-        <!-- Domain Tabs -->
-        <div class="tabs is-centered is-boxed" style="margin-top: 20px;">
-          <ul>
-            <li class="is-active" data-tab="math">
-              <a>
-                <span class="icon is-small"><i class="fas fa-trophy"></i></span>
-                <span>OckBench Selected</span>
-              </a>
-            </li>
-            <!-- Coding tab hidden until results are ready
-            <li data-tab="coding">
-              <a>
-                <span class="icon is-small"><i class="fas fa-code"></i></span>
-                <span>OckBench-Coding</span>
-              </a>
-            </li>
-            -->
-          </ul>
-        </div>
+        <figure class="figure chart-figure" id="chart-figure">
+          <div class="chart-wrap">
+            <svg id="chart-scatter" role="img" aria-label="Scatter plot of accuracy versus average output tokens for the model settings currently shown in the table"></svg>
+            <div class="chart-tip" id="chart-tip" hidden></div>
+          </div>
+          <figcaption>
+            <span class="fig-label">Figure&nbsp;2.</span> Accuracy vs. average output tokens (log scale) for
+            the settings currently shown in Table&nbsp;1 &mdash; it follows the same filter and toggle.
+            Color marks the model family; filled marks are commercial models, hollow marks open-source.
+            The dashed hairline traces the Pareto frontier (the best accuracy attainable at a given token
+            budget); faint hairlines connect effort variants of the same model. Hover a point &mdash; or a
+            row of the table &mdash; to cross-highlight.
+          </figcaption>
+        </figure>
+        <noscript><style>#chart-figure { display: none; }</style></noscript>
 
-        <!-- Math Leaderboard -->
-        <div id="math-table" class="leaderboard-table">
-          <table class="js-sort-table" id="results-math" style="margin-left: auto; margin-right: auto; margin-top: 20px;">
+        <p class="table-caption"><span class="fig-label">Table&nbsp;1.</span> Accuracy, average output tokens, and OckScore for all evaluated model settings, ranked by OckScore.</p>
+
+        <div class="table-wrap">
+          <table class="lb-table">
             <thead>
               <tr>
-                <th class="no-sort" style="vertical-align: middle; width: 50px;"><strong>#</strong></th>
-                <th class="no-sort" style="vertical-align: middle; width: 250px;"><strong>Model</strong></th>
-                <th class="no-sort" style="vertical-align: middle; width: 100px;"><strong>Category</strong></th>
-                <th data-js-sort-colNum="3" style="vertical-align: middle; width: 120px;"><strong>Avg Tokens</strong></th>
-                <th data-js-sort-colNum="4" style="vertical-align: middle; width: 120px;"><strong>Accuracy (%)</strong></th>
-                <th data-js-sort-colNum="5" style="vertical-align: middle; width: 160px;"><strong>OckScore ↑</strong></th>
+                <th scope="col" class="th-rank">#</th>
+                <th scope="col" class="th-model">Model</th>
+                <th scope="col" class="th-license">License</th>
+                <th scope="col" class="th-num" data-sort="avgTokens">Avg Tokens</th>
+                <th scope="col" class="th-num" data-sort="accuracy">Accuracy (%)</th>
+                <th scope="col" class="th-num" data-sort="ockScore">OckScore</th>
               </tr>
             </thead>
-            <tbody>
-              <!-- Rows are dynamically generated from CSV -->
-            </tbody>
+            <tbody id="leaderboard-body"></tbody>
           </table>
         </div>
 
-        <!-- Coding Leaderboard -->
-        <div id="coding-table" class="leaderboard-table" style="display: none;">
-          <table class="js-sort-table" id="results-coding" style="margin-left: auto; margin-right: auto; margin-top: 20px;">
-            <thead>
-              <tr>
-                <th class="no-sort" style="vertical-align: middle; width: 50px;"><strong>#</strong></th>
-                <th class="no-sort" style="vertical-align: middle; width: 250px;"><strong>Model</strong></th>
-                <th class="no-sort" style="vertical-align: middle; width: 100px;"><strong>Category</strong></th>
-                <th data-js-sort-colNum="3" style="vertical-align: middle; width: 120px;"><strong>#Tokens</strong></th>
-                <th data-js-sort-colNum="4" style="vertical-align: middle; width: 120px;"><strong>Accuracy (%)</strong></th>
-                <th data-js-sort-colNum="5" style="vertical-align: middle; width: 150px;"><strong>Reasoning Efficiency</strong></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>1</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>519.31</td><td>61.00</td><td>851.3</td></tr>
-              <tr><td>2</td><td style="text-align: left; padding-left: 10px;"><b>gpt-4.1</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>639.80</td><td>74.50</td><td>858.1</td></tr>
-              <tr><td>3</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>493.23</td><td>53.50</td><td>921.9</td></tr>
-              <tr><td>4</td><td style="text-align: left; padding-left: 10px;"><b>gpt-4o</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>573.54</td><td>61.50</td><td>932.6</td></tr>
-              <tr><td>5</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>631.42</td><td>54.00</td><td>1,169.3</td></tr>
-              <tr><td>6</td><td style="text-align: left; padding-left: 10px;"><b>gpt-5</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>1,584.41</td><td>96.50</td><td>1,641.8</td></tr>
-              <tr><td>7</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>990.27</td><td>51.00</td><td>1,941.7</td></tr>
-              <tr><td>8</td><td style="text-align: left; padding-left: 10px;"><b>Qwen/Qwen3-4B</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>893.80</td><td>39.50</td><td>2,263.8</td></tr>
-              <tr><td>9</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>893.80</td><td>39.50</td><td>2,263.8</td></tr>
-              <tr><td>10</td><td style="text-align: left; padding-left: 10px;"><b>o3</b><br><span style="font-size: 12px; color: #858383;">OpenAI</span></td><td>Commercial</td><td>2,335.24</td><td>93.50</td><td>2,497.6</td></tr>
-              <tr><td>11</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (non-thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>1,073.26</td><td>41.50</td><td>2,586.2</td></tr>
-              <!-- <tr><td>12</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-7B</b><br><span style="font-size: 12px; color: #858383;">Skywork</span></td><td>Open-Source</td><td>1,014.21</td><td>25.50</td><td>3,988.3</td></tr> -->
-              <tr><td>13</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>4,846.07</td><td>85.50</td><td>5,671.6</td></tr>
-              <tr><td>14</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B-Thinking</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>5,927.84</td><td>92.00</td><td>6,443.3</td></tr>
-              <tr><td>15</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-32B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>6,135.86</td><td>85.50</td><td>7,179.0</td></tr>
-              <tr><td>16</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-235B-A22B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>6,545.30</td><td>85.00</td><td>7,700.4</td></tr>
-              <tr><td>17</td><td style="text-align: left; padding-left: 10px;"><b>gemini-3-pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>7,523.07</td><td>95.00</td><td>7,929.5</td></tr>
-              <tr><td>18</td><td style="text-align: left; padding-left: 10px;"><b>AReaL-boba-2-32B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>6,901.34</td><td>85.00</td><td>8,119.2</td></tr>
-              <tr><td>19</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-30B-A3B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>6,412.52</td><td>76.50</td><td>8,388.9</td></tr>
-              <tr><td>20</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-14B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>6,850.90</td><td>77.00</td><td>8,897.3</td></tr>
-              <tr><td>21</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-14B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>7,519.10</td><td>79.50</td><td>9,461.4</td></tr>
-              <tr><td>22</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-7B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>7,082.74</td><td>67.50</td><td>10,419.6</td></tr>
-              <tr><td>23</td><td style="text-align: left; padding-left: 10px;"><b>AceReason-Nemotron-14B</b><br><span style="font-size: 12px; color: #858383;">NVIDIA</span></td><td>Open-Source</td><td>8,515.95</td><td>76.50</td><td>11,128.7</td></tr>
-              <tr><td>24</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-flash</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>9,884.73</td><td>85.00</td><td>11,629.1</td></tr>
-              <tr><td>25</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-pro</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>9,808.19</td><td>79.00</td><td>12,417.9</td></tr>
-              <tr><td>26</td><td style="text-align: left; padding-left: 10px;"><b>AReal-boba-2-8B</b><br><span style="font-size: 12px; color: #858383;">inclusionAI</span></td><td>Open-Source</td><td>10,521.25</td><td>70.50</td><td>14,959.2</td></tr>
-              <tr><td>27</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-8B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>10,637.60</td><td>65.50</td><td>16,251.0</td></tr>
-              <tr><td>28</td><td style="text-align: left; padding-left: 10px;"><b>Qwen3-4B (thinking)</b><br><span style="font-size: 12px; color: #858383;">Alibaba</span></td><td>Open-Source</td><td>13,639.89</td><td>58.00</td><td>23,517.1</td></tr>
-              <!-- <tr><td>29</td><td style="text-align: left; padding-left: 10px;"><b>Sky-T1-mini</b><br><span style="font-size: 12px; color: #858383;">Skywork</span></td><td>Open-Source</td><td>15,132.72</td><td>51.00</td><td>29,672.0</td></tr> -->
-              <tr><td>30</td><td style="text-align: left; padding-left: 10px;"><b>gemini-2.5-flash-lite</b><br><span style="font-size: 12px; color: #858383;">Google</span></td><td>Commercial</td><td>54,042.28</td><td>40.50</td><td>133,435.3</td></tr>
-            </tbody>
-          </table>
+        <p class="table-note">Click a numeric column heading to sort; higher OckScore is better.</p>
+
+        <figure class="figure heat-figure" id="heat-figure">
+          <div class="heat-controls">
+            <div id="heat-metric" role="group" aria-label="Heatmap metric"><button data-metric="accuracy" class="is-active" aria-pressed="true">Accuracy</button><button data-metric="tokens" aria-pressed="false">Avg Tokens</button></div>
+            <p class="heat-legend" aria-hidden="true">
+              <span class="heat-legend-label" id="heat-legend-min">&ndash;</span>
+              <span class="heat-strip is-accuracy" id="heat-strip"></span>
+              <span class="heat-legend-label" id="heat-legend-max">&ndash;</span>
+            </p>
+          </div>
+          <div class="heat-stage">
+            <div class="table-wrap heat-wrap">
+              <table class="heat-table" id="heat-table">
+                <thead>
+                  <tr>
+                    <th scope="col" class="th-model">Model</th>
+                    <th scope="col" class="th-num">Math</th>
+                    <th scope="col" class="th-num">Coding</th>
+                    <th scope="col" class="th-num">Science</th>
+                  </tr>
+                </thead>
+                <tbody id="heatmap-body"></tbody>
+              </table>
+            </div>
+            <div class="chart-tip" id="heat-tip" hidden></div>
+          </div>
+          <figcaption>
+            <span class="fig-label">Figure&nbsp;3.</span> Per-domain accuracy for the settings currently
+            shown in Table&nbsp;1 &mdash; the grid follows the same filter, toggle, and column sorting.
+            Darker cells mark higher values; switch to Avg Tokens for a log-mapped token view. Hover a
+            cell for the exact figures, or a row to cross-highlight with the table.
+          </figcaption>
+        </figure>
+        <noscript><style>#heat-figure { display: none; }</style></noscript>
+      </div>
+    </section>
+
+    <!-- ── 3. Benchmark ────────────────────────────────────────────── -->
+    <section class="section" aria-labelledby="sec-benchmark">
+      <div class="container">
+        <h2 class="sec-head" id="sec-benchmark"><span class="sec-num">3.</span> The Benchmark</h2>
+
+        <p>OckBench provides comprehensive evaluation across multiple dimensions.</p>
+
+        <div class="stats">
+          <div class="stat"><span class="stat-n">200</span><span class="stat-l">Questions per domain</span></div>
+          <div class="stat"><span class="stat-n">3</span><span class="stat-l">Task domains</span></div>
+          <div class="stat"><span class="stat-n">8+</span><span class="stat-l">Source datasets</span></div>
+          <div class="stat"><span class="stat-n"><span class="model-count">49</span></span><span class="stat-l">Settings evaluated</span></div>
+        </div>
+
+        <h3 class="sub-head">Benchmark composition</h3>
+        <p>
+          OckBench aggregates tasks across three complementary reasoning domains. Rather than random
+          sampling, we apply the <strong>Differentiation Filter</strong>: selecting problems where accuracy
+          across models falls within 10%&ndash;90% (avoiding floor/ceiling effects) and token variance is
+          maximized &mdash; isolating instances that reveal intrinsic efficiency differences.
+        </p>
+
+        <div class="bench-bar" role="img" aria-label="Benchmark composition: 100 math problems, 60 coding problems, 40 science problems">
+          <div class="bench-seg seg-math"><span class="seg-label">Math 100</span></div>
+          <div class="bench-seg seg-coding"><span class="seg-label">Coding 60</span></div>
+          <div class="bench-seg seg-science"><span class="seg-label">Science 40</span></div>
+        </div>
+
+        <ul class="domain-list">
+          <li><strong>Mathematics &amp; Reasoning.</strong> GSM8K, AIME 2024/2025, OlympiadBench, MATH500, AMO-Bench, and the mathematics subset of Humanity&rsquo;s Last Exam &mdash; spanning grade-school arithmetic to competition-level number theory.</li>
+          <li><strong>Software Engineering.</strong> A lightweight variant of MBPP and LiveCodeBench, assessing practical code generation and planning skills verified via unit test execution.</li>
+          <li><strong>Scientific Reasoning.</strong> ScienceQA, MMLU (STEM subsets), and GPQA-Diamond, testing knowledge-constrained reasoning and concision under technical load.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── 4. Example tasks ────────────────────────────────────────── -->
+    <section class="section" aria-labelledby="sec-examples">
+      <div class="container">
+        <h2 class="sec-head" id="sec-examples"><span class="sec-num">4.</span> Example Tasks</h2>
+
+        <p>Sample problems from OckBench&rsquo;s math, coding, and science domains. These examples illustrate the types of problems where token efficiency varies significantly across models.</p>
+
+        <div class="examples">
+          <article class="example">
+            <p class="ex-label"><span class="ex-num">Example&nbsp;1</span><span class="ex-src">Mathematics &middot; GSM8K</span></p>
+            <p class="ex-q">A store sells notebooks for $3 each. If you buy more than 10, you get a 20% discount on the total price. How much would it cost to buy 15 notebooks?</p>
+            <p class="ex-note">$3 &times; 15 &times; 0.8 = $36 &mdash; a 3-second mental calculation. Yet some reasoning models spend 2,000+ tokens setting up formal equations, double-checking edge cases, and re-reading the problem before arriving at the obvious answer.</p>
+          </article>
+
+          <article class="example">
+            <p class="ex-label"><span class="ex-num">Example&nbsp;2</span><span class="ex-src">Mathematics &middot; AIME 2024</span></p>
+            <p class="ex-q">Find the number of ordered pairs (a,b) of integers such that a&sup2; + b&sup2; = 2024 and both a and b are positive.</p>
+            <p class="ex-note">Efficient models notice 2024 = 4 &times; 506 and apply modular arithmetic to eliminate large search spaces in a few steps. Verbose models enumerate all 44&sup2; candidate pairs one by one &mdash; correct eventually, but at 10&times; the token cost.</p>
+          </article>
+
+          <article class="example">
+            <p class="ex-label"><span class="ex-num">Example&nbsp;3</span><span class="ex-src">Coding &middot; MBPP variant</span></p>
+            <p class="ex-q">Write a function to find the longest common subsequence of two strings. For example, lcs(&ldquo;ABCDGH&rdquo;, &ldquo;AEDFHR&rdquo;) should return 3 (the LCS is &ldquo;ADH&rdquo;).</p>
+            <p class="ex-note">A clean DP solution is ~10 lines. But many models first write a recursive solution, identify the redundancy, rewrite with memoization, then pivot to bottom-up &mdash; producing correct code buried under 800 tokens of self-tutoring.</p>
+          </article>
+
+          <article class="example">
+            <p class="ex-label"><span class="ex-num">Example&nbsp;4</span><span class="ex-src">Scientific Reasoning &middot; GPQA-Diamond</span></p>
+            <p class="ex-q">A molecule undergoes a photochemical reaction in which it absorbs a photon and transitions to an excited state. If the excited state has a lifetime of 10 ns, what is the natural linewidth (in Hz) of the corresponding spectral line?</p>
+            <p class="ex-note">Efficient models recall &Delta;&nu; = 1/(2&pi;&tau;) and plug in &tau; = 10 ns for an instant answer. Overthinking models re-derive the time-energy uncertainty relation from first principles &mdash; impressively thorough, but it is a textbook formula lookup.</p>
+          </article>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
+    <!-- ── 5. Key findings ─────────────────────────────────────────── -->
+    <section class="section" aria-labelledby="sec-findings">
+      <div class="container">
+        <h2 class="sec-head" id="sec-findings"><span class="sec-num">5.</span> Key Findings</h2>
 
-<section class="section" style="background-color: #f8fafc;">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full">
-        <h2 class="title is-3">Benchmark Overview</h2>
-        <div class="content">
-          <p class="subtitle is-5">
-            OckBench provides comprehensive evaluation across multiple dimensions
-          </p>
-        </div>
-
-        <!-- Statistics Cards -->
-        <div class="columns is-multiline is-centered" style="margin-top: 30px;">
-          <div class="column is-one-quarter">
-            <div class="metric-card">
-              <div class="metric-title">Questions per Domain</div>
-              <div class="metric-value">200</div>
-            </div>
-          </div>
-          <div class="column is-one-quarter">
-            <div class="metric-card">
-              <div class="metric-title">Task Domains</div>
-              <div class="metric-value">3</div>
-            </div>
-          </div>
-          <div class="column is-one-quarter">
-            <div class="metric-card">
-              <div class="metric-title">Source Datasets</div>
-              <div class="metric-value">8+</div>
-            </div>
-          </div>
-          <div class="column is-one-quarter">
-            <div class="metric-card">
-              <div class="metric-title">Settings Evaluated</div>
-              <div class="metric-value">49</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Task Domains -->
-        <div class="content has-text-left" style="margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
-          <h3 class="title is-4 has-text-centered">Benchmark Composition</h3>
-          <p style="text-align: justify;">
-            OckBench aggregates tasks across three complementary reasoning domains. Rather than random sampling, we apply the <strong>Differentiation Filter</strong>: selecting problems where accuracy across models falls within 10%–90% (avoiding floor/ceiling effects) and token variance is maximized — isolating instances that reveal intrinsic efficiency differences.
-          </p>
-          <ul style="margin-top: 20px;">
-            <li><strong>Mathematics &amp; Reasoning:</strong> GSM8K, AIME 2024/2025, OlympiadBench, MATH500, AMO-Bench, and the mathematics subset of Humanity's Last Exam — spanning grade-school arithmetic to competition-level number theory.</li>
-            <li><strong>Software Engineering:</strong> A lightweight variant of MBPP and LiveCodeBench, assessing practical code generation and planning skills verified via unit test execution.</li>
-            <li><strong>Scientific Reasoning:</strong> ScienceQA, MMLU (STEM subsets), and GPQA-Diamond, testing knowledge-constrained reasoning and concision under technical load.</li>
-          </ul>
-        </div>
-
-        <!-- Evaluation Metrics -->
-        <!-- <div class="content has-text-left" style="margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
-          <h3 class="title is-4 has-text-centered">Evaluation Metrics</h3>
-          <p style="text-align: justify; margin-bottom: 15px;">
-            OckBench uses <strong>decoding token count</strong> as the core efficiency metric—a model- and hardware-agnostic measure that captures the intrinsic reasoning efficiency of models.
-          </p>
-          <ul>
-            <li><strong>Decoding Token Count (#Tokens):</strong> Total number of tokens generated during reasoning (model-agnostic, hardware-agnostic)</li>
-            <li><strong>Accuracy (%):</strong> Percentage of correctly solved problems</li>
-            <li><strong>Reasoning Efficiency:</strong> Computed as #Tokens / Accuracy, measuring cost per unit of correctness</li>
-          </ul>
-          <p style="text-align: justify; margin-top: 15px; font-style: italic; color: #64748b;">
-            By selecting questions with high variance in token consumption across models, OckBench reveals efficiency differences that traditional accuracy-only benchmarks miss.
-          </p>
-        </div> -->
+        <ol class="findings">
+          <li><strong>Closed models own the efficiency frontier.</strong> GPT-5.5 (medium) remains first at 82.15 OckScore, and Claude Opus 4.8 (xhigh) enters second at 81.61 with the highest accuracy in the table (91.5%). The top ten settings are all GPT-5.x or Claude Opus; the best open-weight setting ranks 16th.</li>
+          <li><strong>Open-source accuracy is close, but efficiency still lags.</strong> DeepSeek-V4-Pro (high) reaches 84.0%, within two points of GPT-5.5 (medium), but spends <strong>9.3&times; more tokens</strong> (43,652 vs 4,692). The accuracy gap has nearly closed; the per-token-intelligence gap has not.</li>
+          <li><strong>The Overthinking Tax.</strong> In the Qwen3.5 family, larger models are both smarter <em>and</em> leaner &mdash; Qwen3.5-9B burns 116,222 tokens for 21.5% accuracy (last place at OckScore &minus;3.85), while Qwen3.5-397B-A17B reaches 67.5% using <strong>4.4&times; fewer</strong> tokens. Smaller models over-generate to compensate for lower capacity.</li>
+          <li><strong>More effort is not monotonically better.</strong> Claude Opus 4.8 peaks at xhigh (91.5%, OckScore 81.61). Moving to max lowers accuracy to 90.0% while more than doubling tokens (16,876 &rarr; 36,544), dropping OckScore to 74.62.</li>
+          <li><strong>Open-weight leaders are tightly matched.</strong> DeepSeek-V4-Pro (high) reaches 84.0% at 43,652 tokens and 67.20 OckScore, while GLM-5.2 (max) reaches 83.5% at 41,234 tokens and 67.16 OckScore.</li>
+          <li><strong>MiniMax-M2.7 is reported as a repeated-run average.</strong> Its row pools minimal/low/medium/high requested labels to 66.875% accuracy, 35,538 average output tokens, and 51.72 OckScore. The labels were accepted by the gateway but are not presented as a verified reasoning-depth ladder.</li>
+        </ol>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
+    <!-- ── 6. Citation ─────────────────────────────────────────────── -->
+    <section class="section" aria-labelledby="sec-citation">
+      <div class="container">
+        <h2 class="sec-head" id="sec-citation"><span class="sec-num">6.</span> Citation</h2>
 
-<section class="section" style="background-color: #f8fafc;">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Example Tasks</h2>
-        <div class="content">
-          <p class="subtitle is-5">
-            Sample problems from OckBench's math, coding, and science domains
-          </p>
-          <p style="font-size: 14px; color: #64748b;">
-            These examples illustrate the types of problems where token efficiency varies significantly across models.
-          </p>
-        </div>
+        <p>If you find OckBench useful for your research, please cite our work.</p>
 
-        <div class="columns is-multiline" style="margin-top: 30px;">
-          <!-- Math Example 1 -->
-          <div class="column is-half">
-            <div class="box" style="text-align: left; min-height: 220px;">
-              <h4 class="title is-5" style="color: #2563eb;"><i class="fas fa-calculator"></i> Math Problem (GSM8K)</h4>
-              <p><strong>Question:</strong> A store sells notebooks for $3 each. If you buy more than 10, you get a 20% discount on the total price. How much would it cost to buy 15 notebooks?</p>
-              <p style="margin-top: 10px; font-size: 14px; color: #64748b;">
-                <strong>Domain:</strong> Mathematics &nbsp;|&nbsp; <strong>Source:</strong> GSM8K
-              </p>
-              <p style="margin-top: 10px; font-size: 13px; color: #2563eb; font-style: italic;">
-                $3 × 15 × 0.8 = $36 — a 3-second mental calculation. Yet some reasoning models spend 2,000+ tokens setting up formal equations, double-checking edge cases, and re-reading the problem before arriving at the obvious answer.
-              </p>
-            </div>
-          </div>
-
-          <!-- Math Example 2 -->
-          <div class="column is-half">
-            <div class="box" style="text-align: left; min-height: 220px;">
-              <h4 class="title is-5" style="color: #2563eb;"><i class="fas fa-calculator"></i> Math Problem (AIME)</h4>
-              <p><strong>Question:</strong> Find the number of ordered pairs (a,b) of integers such that a² + b² = 2024 and both a and b are positive.</p>
-              <p style="margin-top: 10px; font-size: 14px; color: #64748b;">
-                <strong>Domain:</strong> Mathematics &nbsp;|&nbsp; <strong>Source:</strong> AIME 2024
-              </p>
-              <p style="margin-top: 10px; font-size: 13px; color: #2563eb; font-style: italic;">
-                Efficient models notice 2024 = 4 × 506 and apply modular arithmetic to eliminate large search spaces in a few steps. Verbose models enumerate all 44² candidate pairs one by one — correct eventually, but at 10× the token cost.
-              </p>
-            </div>
-          </div>
-
-          <!-- Coding Example 1 -->
-          <div class="column is-half">
-            <div class="box" style="text-align: left; min-height: 220px;">
-              <h4 class="title is-5" style="color: #2563eb;"><i class="fas fa-code"></i> Coding Problem (MBPP)</h4>
-              <p><strong>Task:</strong> Write a function to find the longest common subsequence of two strings. For example, lcs("ABCDGH", "AEDFHR") should return 3 (the LCS is "ADH").</p>
-              <p style="margin-top: 10px; font-size: 14px; color: #64748b;">
-                <strong>Domain:</strong> Coding &nbsp;|&nbsp; <strong>Source:</strong> MBPP variant
-              </p>
-              <p style="margin-top: 10px; font-size: 13px; color: #2563eb; font-style: italic;">
-                A clean DP solution is ~10 lines. But many models first write a recursive solution, identify the redundancy, rewrite with memoization, then pivot to bottom-up — producing correct code buried under 800 tokens of self-tutoring.
-              </p>
-            </div>
-          </div>
-
-          <!-- Science Example -->
-          <div class="column is-half">
-            <div class="box" style="text-align: left; min-height: 220px;">
-              <h4 class="title is-5" style="color: #2563eb;"><i class="fas fa-atom"></i> Science Problem (GPQA-Diamond)</h4>
-              <p><strong>Question:</strong> A molecule undergoes a photochemical reaction in which it absorbs a photon and transitions to an excited state. If the excited state has a lifetime of 10 ns, what is the natural linewidth (in Hz) of the corresponding spectral line?</p>
-              <p style="margin-top: 10px; font-size: 14px; color: #64748b;">
-                <strong>Domain:</strong> Scientific Reasoning &nbsp;|&nbsp; <strong>Source:</strong> GPQA-Diamond
-              </p>
-              <p style="margin-top: 10px; font-size: 13px; color: #2563eb; font-style: italic;">
-                Efficient models recall Δν = 1/(2πτ) and plug in τ = 10 ns for an instant answer. Overthinking models re-derive the time-energy uncertainty relation from first principles — impressively thorough, but it's a textbook formula lookup.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Key Findings</h2>
-        <div class="content has-text-centered">
-          <div style="max-width: 800px; margin: 0 auto; text-align: left;">
-            <ul>
-              <li><strong>Closed models own the efficiency frontier:</strong> GPT-5.5 (medium) remains first at 82.15 OckScore, and Claude Opus 4.8 (xhigh) enters second at 81.61 with the highest accuracy in the table (91.5%). The top ten settings are all GPT-5.x or Claude Opus; the best open-weight setting ranks 16th.</li>
-              <li><strong>Open-source accuracy is close, but efficiency still lags:</strong> DeepSeek-V4-Pro (high) reaches 84.0%, within two points of GPT-5.5 (medium), but spends <strong>9.3× more tokens</strong> (43,652 vs 4,692). The accuracy gap has nearly closed; the per-token-intelligence gap has not.</li>
-              <li><strong>The Overthinking Tax:</strong> In the Qwen3.5 family, larger models are both smarter <em>and</em> leaner — Qwen3.5-9B burns 116,222 tokens for 21.5% accuracy (last place at OckScore −3.85), while Qwen3.5-397B-A17B reaches 67.5% using <strong>4.4× fewer</strong> tokens. Smaller models over-generate to compensate for lower capacity.</li>
-              <li><strong>More effort is not monotonically better:</strong> Claude Opus 4.8 peaks at xhigh (91.5%, OckScore 81.61). Moving to max lowers accuracy to 90.0% while more than doubling tokens (16,876 → 36,544), dropping OckScore to 74.62.</li>
-              <li><strong>Open-weight leaders are tightly matched:</strong> DeepSeek-V4-Pro (high) reaches 84.0% at 43,652 tokens and 67.20 OckScore, while GLM-5.2 (max) reaches 83.5% at 41,234 tokens and 67.16 OckScore.</li>
-              <li><strong>MiniMax-M2.7 is reported as a repeated-run average:</strong> its row pools minimal/low/medium/high requested labels to 66.875% accuracy, 35,538 average output tokens, and 51.72 OckScore. The labels were accepted by the gateway but are not presented as a verified reasoning-depth ladder.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="section" style="background-color: #f8fafc;">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Citation</h2>
-        <div class="content">
-          <p class="subtitle is-5">
-            If you find OckBench useful for your research, please cite our work
-          </p>
-        </div>
-        <div style="text-align: left; max-width: 700px; margin: 20px auto; position: relative;">
-          <pre style="background-color: #f0f2f5; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 0; border: 1px solid #d1d9e0;"><code>@article{du2025ockbench,
+        <div class="bibtex-wrap">
+          <pre class="bibtex"><code id="bibtex-code">@article{du2025ockbench,
   title={OckBench: Measuring the Efficiency of LLM Reasoning},
   author={Du, Zheng and Kang, Hao and Han, Song and Krishna, Tushar and Zhu, Ligeng},
   journal={arXiv preprint arXiv:2511.05722},
   year={2025}
 }</code></pre>
-          <button onclick="copyBibtex(this)" style="position: absolute; top: 8px; right: 8px; background: #f0f2f5; border: 1px solid #d1d9e0; border-radius: 6px; padding: 5px 8px; cursor: pointer; font-size: 14px; color: #656d76; line-height: 1; transition: background 0.15s, color 0.15s;" onmouseenter="this.style.background='#e0e3e7';this.style.color='#1f2328'" onmouseleave="this.style.background='#f0f2f5';this.style.color='#656d76'">
-            <i class="far fa-copy"></i>
-          </button>
+          <button id="copy-bibtex-btn">Copy</button>
         </div>
       </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-line"><strong>OckBench</strong> &mdash; Evaluating Accuracy and Efficiency in LLM Reasoning</p>
+      <p class="colophon">A bespoke static page &middot; Set in Newsreader and Source Serif&nbsp;4</p>
     </div>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <p>
-        <strong>OckBench</strong> - Evaluating Accuracy and Efficiency in LLM Reasoning
-      </p>
-      <p style="font-size: 14px; color: #64748b; margin-top: 20px;">
-        This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-      </p>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Copy BibTeX citation
-  function copyBibtex(btn) {
-    const code = btn.parentElement.querySelector('code').textContent;
-    navigator.clipboard.writeText(code).then(() => {
-      btn.innerHTML = '<i class="fas fa-check" style="color:#1a7f37"></i>';
-      setTimeout(() => {
-        btn.innerHTML = '<i class="far fa-copy"></i>';
-      }, 2000);
-    });
-  }
-
-  // ── Configuration ──────────────────────────────────────────────────
-  // To add a new model: just add a row to static/data/top200_model_performance.csv
-  // To mark it as a "core" model shown by default: add its CSV name here
-  const SELECTED_MODELS = new Set([
-    'gpt-5.5-medium', 'gpt-5.5-high', 'gpt-5.4-medium',
-    'opus-4.8-xhigh', 'opus-4.8-medium', 'opus-4.7-xhigh',
-    'opus-4.6', 'gemini-3.1-pro-preview', 'deepseek-v4-pro-high',
-    'deepseek-v4-flash-high', 'glm-5.2-max', 'kimi-k2.6',
-    'qwen3.5-397b-a17b', 'minimax-m2.7', 'mimo-v2.5-pro-thinking', 'glm-5.1',
-    'sonnet-4.6', 'gemma-4-31b-it', 'qwen3.6-27b', 'gemini-2.5-pro',
-  ]);
-
-  // Display name overrides (CSV name → display name)
-  const DISPLAY_NAMES = {
-    'gpt-5.5': 'GPT-5.5 (none)',
-    'gpt-5.5-low': 'GPT-5.5 (low)',
-    'gpt-5.5-medium': 'GPT-5.5 (medium)',
-    'gpt-5.5-high': 'GPT-5.5 (high)',
-    'gpt-5.5-xhigh': 'GPT-5.5 (xhigh)',
-    'gpt-5.4': 'GPT-5.4 (none)',
-    'gpt-5.4-low': 'GPT-5.4 (low)',
-    'gpt-5.4-medium': 'GPT-5.4 (medium)',
-    'gpt-5.4-high': 'GPT-5.4 (high)',
-    'opus-4.7-xhigh': 'Claude Opus 4.7 (xhigh)',
-    'opus-4.8-low': 'Claude Opus 4.8 (low)',
-    'opus-4.8-medium': 'Claude Opus 4.8 (medium)',
-    'opus-4.8-high': 'Claude Opus 4.8 (high)',
-    'opus-4.8-xhigh': 'Claude Opus 4.8 (xhigh)',
-    'opus-4.8-max': 'Claude Opus 4.8 (max)',
-    'opus-4.6': 'Claude Opus 4.6',
-    'opus-4.5': 'Claude Opus 4.5',
-    'sonnet-4.6': 'Claude Sonnet 4.6',
-    'sonnet-4.5': 'Claude Sonnet 4.5',
-    'gemini-3.1-pro-preview': 'Gemini 3.1 Pro',
-    'gemini-3.1-flash-lite': 'Gemini 3.1 Flash-Lite',
-    'gemini-3-flash-preview': 'Gemini 3 Flash',
-    'gemini-2.5-pro': 'Gemini 2.5 Pro',
-    'gemini-2.5-flash': 'Gemini 2.5 Flash',
-    'deepseek-v4-flash-none': 'DeepSeek-V4-Flash (none)',
-    'deepseek-v4-flash-high': 'DeepSeek-V4-Flash (high)',
-    'deepseek-v4-flash-max': 'DeepSeek-V4-Flash (max)',
-    'deepseek-v4-pro-none': 'DeepSeek-V4-Pro (none)',
-    'deepseek-v4-pro-high': 'DeepSeek-V4-Pro (high)',
-    'deepseek-v4-pro-max': 'DeepSeek-V4-Pro (max)',
-    'kimi-k2.6': 'Kimi-K2.6',
-    'kimi-k2.5': 'Kimi-K2.5',
-    'minimax-m2.7': 'MiniMax-M2.7',
-    'minimax-m2.5': 'MiniMax-M2.5',
-    'glm-5.1': 'GLM-5.1',
-    'glm-5': 'GLM-5',
-    'glm-5.2-off': 'GLM-5.2 (off)',
-    'glm-5.2-high': 'GLM-5.2 (high)',
-    'glm-5.2-max': 'GLM-5.2 (max)',
-    'mimo-v2.5-pro-thinking': 'MiMo-V2.5-Pro',
-    'mimo-v2.5-thinking': 'MiMo-V2.5',
-    'qwen-235b': 'Qwen-235B',
-    'qwen3.5-397b-a17b': 'Qwen3.5-397B-A17B',
-    'qwen3.5-122b-a10b': 'Qwen3.5-122B-A10B',
-    'qwen3.5-35b-a3b': 'Qwen3.5-35B-A3B',
-    'qwen3.5-9b': 'Qwen3.5-9B',
-    'qwen3.6-27b': 'Qwen3.6-27B',
-    'qwen3.6-35b-a3b': 'Qwen3.6-35B-A3B',
-    'gemma-4-31b-it': 'Gemma-4-31B-IT',
-  };
-
-  const LOGO_MAP = {
-    'Gemini': 'gemini-color.svg',
-    'Google': 'gemini-color.svg',
-    'OpenAI': 'openai.svg',
-    'DeepSeek': 'deepseek_logo.svg',
-    'Kimi': 'kimi.svg',
-    'Qwen': 'qwen-color.svg',
-    'Alibaba': 'qwen-color.svg',
-    'NVIDIA': 'nvidia-color.svg',
-    'AceReason': 'nvidia-color.svg',
-    'Grok': 'grok.svg',
-    'MiniMax': 'minimax-color.svg',
-    'MiMo': 'xiaomi.svg',
-    'Claude': 'claude_logo.svg',
-    'Gemma': 'gemma.svg',
-    'Z.ai': 'zai.svg',
-    'GLM': 'zai.svg',
-  };
-
-  // ── CSV loading & table generation ─────────────────────────────────
-  function parseCSV(text) {
-    const lines = text.replace(/\r/g, '').trim().split('\n');
-    return lines.slice(1).map(line => {
-      const cols = line.split(',');
-      return {
-        model: cols[0],
-        category: cols[1],
-        license: cols[2],
-        accuracy: parseFloat(cols[3]),
-        avgTokens: parseInt(cols[4]),
-        correct: parseInt(cols[5]),
-        total: parseInt(cols[6]),
-        ockScore: parseFloat(cols[7]),
-      };
-    });
-  }
-
-  function formatNumber(n) {
-    return n.toLocaleString('en-US');
-  }
-
-  function buildRow(entry) {
-    const displayName = DISPLAY_NAMES[entry.model] || entry.model;
-    const isSelected = SELECTED_MODELS.has(entry.model);
-    const tr = document.createElement('tr');
-    if (isSelected) tr.dataset.selected = 'true';
-
-    // # (placeholder, updated by updateRowNumbers)
-    const tdRank = document.createElement('td');
-    tdRank.textContent = '0';
-    tr.appendChild(tdRank);
-
-    // Model name + category
-    const tdModel = document.createElement('td');
-    tdModel.style.cssText = 'text-align:left;padding-left:10px;';
-    const logo = LOGO_MAP[entry.category];
-    if (logo) {
-      const img = document.createElement('img');
-      img.src = 'static/images/logos/' + logo;
-      img.alt = entry.category;
-      img.style.cssText = 'height:1.1em;width:1.1em;vertical-align:middle;margin-right:5px;';
-      tdModel.appendChild(img);
-    }
-    const b = document.createElement('b');
-    b.textContent = displayName;
-    tdModel.appendChild(b);
-    tr.appendChild(tdModel);
-
-    // License pill
-    const tdLicense = document.createElement('td');
-    const isCommercial = entry.license === 'Commercial';
-    const pill = document.createElement('span');
-    pill.textContent = entry.license;
-    pill.style.cssText = isCommercial
-      ? 'background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:9999px;padding:2px 10px;font-size:12px;white-space:nowrap;'
-      : 'background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:9999px;padding:2px 10px;font-size:12px;white-space:nowrap;';
-    tdLicense.appendChild(pill);
-    tr.appendChild(tdLicense);
-
-    // Avg Tokens
-    const tdTokens = document.createElement('td');
-    tdTokens.textContent = formatNumber(entry.avgTokens);
-    tr.appendChild(tdTokens);
-
-    // Accuracy
-    const tdAcc = document.createElement('td');
-    tdAcc.textContent = entry.accuracy.toFixed(1);
-    tr.appendChild(tdAcc);
-
-    // OckScore
-    const tdScore = document.createElement('td');
-    tdScore.textContent = entry.ockScore.toFixed(2);
-    tr.appendChild(tdScore);
-
-    return tr;
-  }
-
-  let totalModelCount = 0;
-
-  async function loadLeaderboard() {
-    const resp = await fetch('static/data/top200_model_performance.csv');
-    const text = await resp.text();
-    const data = parseCSV(text);
-    data.sort((a, b) => b.ockScore - a.ockScore);
-
-    totalModelCount = data.length;
-    const tbody = document.querySelector('#results-math tbody');
-    const fragment = document.createDocumentFragment();
-    data.forEach(entry => fragment.appendChild(buildRow(entry)));
-    tbody.appendChild(fragment);
-
-    // Update all model count references
-    document.getElementById('toggle-models-btn').textContent = `Show all ${totalModelCount} settings ▾`;
-    document.querySelectorAll('.model-count').forEach(el => el.textContent = totalModelCount);
-    document.querySelectorAll('.metric-value').forEach(el => {
-      const title = el.parentElement?.querySelector('.metric-title');
-      if (title && title.textContent.includes('Settings Evaluated')) el.textContent = totalModelCount;
-    });
-
-    applyFilters();
-  }
-
-  // ── Toggle & filter ────────────────────────────────────────────────
-  let showingAll = false;
-  let licenseFilter = 'all';
-
-  function applyFilters() {
-    document.querySelectorAll('#results-math tbody tr').forEach(row => {
-      const selectedOk = showingAll || row.dataset.selected === 'true';
-      const license = row.querySelectorAll('td')[2]?.textContent.trim();
-      const licenseOk = licenseFilter === 'all' || license === licenseFilter;
-      row.style.display = (selectedOk && licenseOk) ? '' : 'none';
-    });
-    updateRowNumbers('results-math');
-  }
-
-  window.toggleLeaderboard = function() {
-    showingAll = !showingAll;
-    document.getElementById('toggle-models-btn').textContent =
-      showingAll ? 'Show fewer ▴' : `Show all ${totalModelCount} settings ▾`;
-    applyFilters();
-  };
-
-  window.filterByLicense = function(filter) {
-    licenseFilter = filter;
-    const active = '#2563eb';
-    const inactive = '#cbd5e1';
-    ['all', 'Commercial', 'Open-Source'].forEach(f => {
-      const id = 'filter-' + (f === 'all' ? 'all' : f === 'Commercial' ? 'commercial' : 'opensource') + '-btn';
-      const btn = document.getElementById(id);
-      if (f === filter) {
-        btn.style.background = active;
-        btn.style.color = '#fff';
-        btn.style.borderColor = active;
-      } else {
-        btn.style.background = '';
-        btn.style.color = '#64748b';
-        btn.style.borderColor = inactive;
-      }
-    });
-    applyFilters();
-  };
-
-  function updateRowNumbers(tableId) {
-    let rank = 0;
-    document.querySelectorAll(`#${tableId} tbody tr`).forEach(row => {
-      if (row.style.display !== 'none') {
-        rank++;
-        row.querySelector('td').innerText = rank;
-      }
-    });
-  }
-
-  // ── Initialization ─────────────────────────────────────────────────
-  document.addEventListener('DOMContentLoaded', () => {
-    loadLeaderboard();
-
-    // Navbar burger toggle
-    document.querySelectorAll('.navbar-burger').forEach(el => {
-      el.addEventListener('click', () => {
-        const $target = document.getElementById(el.dataset.target);
-        el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
-      });
-    });
-
-    // Tab switching for leaderboard
-    const tabs = document.querySelectorAll('.tabs li');
-    const mathTable = document.getElementById('math-table');
-    const codingTable = document.getElementById('coding-table');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        e.preventDefault();
-        tabs.forEach(t => t.classList.remove('is-active'));
-        tab.classList.add('is-active');
-        const tabType = tab.getAttribute('data-tab');
-        if (tabType === 'math') {
-          mathTable.style.display = 'block';
-          codingTable.style.display = 'none';
-        } else if (tabType === 'coding') {
-          mathTable.style.display = 'none';
-          codingTable.style.display = 'block';
-        }
-      });
-    });
-
-    // Re-number rows after column sort
-    const mathTableEl = document.querySelector('#results-math');
-    const codingTableEl = document.querySelector('#results-coding');
-    if (mathTableEl) mathTableEl.addEventListener('click', () => setTimeout(() => updateRowNumbers('results-math'), 100));
-    if (codingTableEl) codingTableEl.addEventListener('click', () => setTimeout(() => updateRowNumbers('results-coding'), 100));
-  });
-</script>
+  </footer>
 
 </body>
 </html>
