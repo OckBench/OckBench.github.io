@@ -2,6 +2,9 @@ Model,Domain,Accuracy (%),Avg Output Tokens,Correct,Total
 gpt-5.5-medium,Math,80.0,6723,80,100
 gpt-5.5-medium,Coding,96.7,1739,58,60
 gpt-5.5-medium,Science,85.0,4043,34,40
+gemini-3.1-pro-preview-medium,Math,87.0,9805,87,100
+gemini-3.1-pro-preview-medium,Coding,90.0,4734,54,60
+gemini-3.1-pro-preview-medium,Science,85.0,3910,34,40
 opus-4.8-xhigh,Math,90.0,25038,90,100
 opus-4.8-xhigh,Coding,93.3,4002,56,60
 opus-4.8-xhigh,Science,92.5,15785,37,40
@@ -26,6 +29,9 @@ gpt-5.4-high,Science,70.0,7698,28,40
 opus-4.7-xhigh,Math,81.0,11406,81,100
 opus-4.7-xhigh,Coding,85.0,1878,51,60
 opus-4.7-xhigh,Science,85.0,6076,34,40
+gemini-3.1-pro-preview-low,Math,73.0,4208,73,100
+gemini-3.1-pro-preview-low,Coding,91.7,2652,55,60
+gemini-3.1-pro-preview-low,Science,77.5,2155,31,40
 gpt-5.4-low,Math,73.0,4646,73,100
 gpt-5.4-low,Coding,91.7,1181,55,60
 gpt-5.4-low,Science,70.0,1891,28,40
@@ -35,9 +41,6 @@ opus-4.8-max,Science,90.0,34230,36,40
 gpt-5.5-low,Math,65.0,2255,65,100
 gpt-5.5-low,Coding,95.0,738,57,60
 gpt-5.5-low,Science,70.0,1271,28,40
-gemini-3.1-pro-preview,Math,72.0,4130,72,100
-gemini-3.1-pro-preview,Coding,86.7,2723,52,60
-gemini-3.1-pro-preview,Science,70.0,1934,28,40
 opus-4.6,Math,88.0,41964,88,100
 opus-4.6,Coding,88.3,7187,53,60
 opus-4.6,Science,70.0,27217,28,40

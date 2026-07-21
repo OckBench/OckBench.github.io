@@ -90,7 +90,7 @@
         </ol>
 
         <p>
-          Through extensive evaluations on <span class="model-count">49</span> frontier and open-source model
+          Through extensive evaluations on <span class="model-count">50</span> frontier and open-source model
           settings, we find that top open-source models have nearly closed the accuracy gap but consume up to
           <strong>26&times; more tokens</strong> than commercial counterparts for comparable accuracy.
           Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating
@@ -101,7 +101,7 @@
           <img src="static/images/bubble_plot.png" alt="Scatter plot of accuracy versus average output tokens for all evaluated models; commercial models dominate the upper-left Pareto frontier while open-source models cluster to the right." loading="lazy">
           <figcaption>
             <span class="fig-label">Figure&nbsp;1.</span> Accuracy vs. Average Tokens across
-            <span class="model-count">49</span> evaluated model settings. Models in the upper-left corner are
+            <span class="model-count">50</span> evaluated model settings. Models in the upper-left corner are
             ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
           </figcaption>
         </figure>
@@ -110,7 +110,7 @@
         <div class="observations">
           <div class="obs">
             <h4>Closed models own the frontier</h4>
-            <p>GPT-5.5 (medium) still leads at <strong>82.2</strong> OckScore, while Claude Opus 4.8 (xhigh) is second at <strong>81.6</strong> with 91.5% accuracy. The top ten settings are all GPT-5.x or Claude Opus.</p>
+            <p>GPT-5.5 (medium) still leads at <strong>82.15</strong> OckScore, with Gemini 3.1 Pro (medium) nearly tied at <strong>82.13</strong> and 87.5% accuracy. Claude Opus 4.8 (xhigh) follows at 81.61 with the table&rsquo;s highest accuracy, 91.5%.</p>
           </div>
           <div class="obs">
             <h4>Open vs. closed gap</h4>
@@ -226,7 +226,7 @@
           <div class="stat"><span class="stat-n">200</span><span class="stat-l">Questions per domain</span></div>
           <div class="stat"><span class="stat-n">3</span><span class="stat-l">Task domains</span></div>
           <div class="stat"><span class="stat-n">8+</span><span class="stat-l">Source datasets</span></div>
-          <div class="stat"><span class="stat-n"><span class="model-count">49</span></span><span class="stat-l">Settings evaluated</span></div>
+          <div class="stat"><span class="stat-n"><span class="model-count">50</span></span><span class="stat-l">Settings evaluated</span></div>
         </div>
 
         <h3 class="sub-head">Benchmark composition</h3>
@@ -292,7 +292,7 @@
         <h2 class="sec-head" id="sec-findings"><span class="sec-num">5.</span> Key Findings</h2>
 
         <ol class="findings">
-          <li><strong>Closed models own the efficiency frontier.</strong> GPT-5.5 (medium) remains first at 82.15 OckScore, and Claude Opus 4.8 (xhigh) enters second at 81.61 with the highest accuracy in the table (91.5%). The top ten settings are all GPT-5.x or Claude Opus; the best open-weight setting ranks 16th.</li>
+          <li><strong>Closed models own the efficiency frontier.</strong> GPT-5.5 (medium) remains first at 82.15 OckScore, Gemini 3.1 Pro (medium) enters second at 82.13, and Claude Opus 4.8 (xhigh) is third at 81.61 with the highest accuracy in the table (91.5%). The top ten settings are all GPT-5.x, Claude Opus, or Gemini; the best open-weight setting ranks 17th.</li>
           <li><strong>Open-source accuracy is close, but efficiency still lags.</strong> DeepSeek-V4-Pro (high) reaches 84.0%, within two points of GPT-5.5 (medium), but spends <strong>9.3&times; more tokens</strong> (43,652 vs 4,692). The accuracy gap has nearly closed; the per-token-intelligence gap has not.</li>
           <li><strong>The Overthinking Tax.</strong> In the Qwen3.5 family, larger models are both smarter <em>and</em> leaner &mdash; Qwen3.5-9B burns 116,222 tokens for 21.5% accuracy (last place at OckScore &minus;3.85), while Qwen3.5-397B-A17B reaches 67.5% using <strong>4.4&times; fewer</strong> tokens. Smaller models over-generate to compensate for lower capacity.</li>
           <li><strong>More effort is not monotonically better.</strong> Claude Opus 4.8 peaks at xhigh (91.5%, OckScore 81.61). Moving to max lowers accuracy to 90.0% while more than doubling tokens (16,876 &rarr; 36,544), dropping OckScore to 74.62.</li>

@@ -1,5 +1,6 @@
 Model,Category,License,Accuracy (%),Avg Output Tokens,Correct,Total,OckScore
 gpt-5.5-medium,OpenAI,Commercial,86,4692,172,200,82.15
+gemini-3.1-pro-preview-medium,Gemini,Commercial,87.5,7116,175,200,82.13
 opus-4.8-xhigh,Claude,Commercial,91.5,16876,183,200,81.61
 gpt-5.5-high,OpenAI,Commercial,88.5,10018,177,200,81.56
 gpt-5.5-xhigh,OpenAI,Commercial,90,13271,180,200,81.55
@@ -8,10 +9,10 @@ opus-4.8-high,Claude,Commercial,86,8870,172,200,79.65
 gpt-5.4-medium,OpenAI,Commercial,82,3177,164,200,79.24
 gpt-5.4-high,OpenAI,Commercial,80.5,3267,161,200,77.67
 opus-4.7-xhigh,Claude,Commercial,83,7481,166,200,77.41
+gemini-3.1-pro-preview-low,Gemini,Commercial,79.5,3331,159,200,76.63
 gpt-5.4-low,OpenAI,Commercial,78,3056,156,200,75.33
 opus-4.8-max,Claude,Commercial,90,36544,180,200,74.62
 gpt-5.5-low,OpenAI,Commercial,75,1603,150,200,73.51
-gemini-3.1-pro-preview,Gemini,Commercial,76,3263,152,200,73.18
 opus-4.6,Claude,Commercial,84.5,28582,169,200,71.00
 opus-4.8-low,Claude,Commercial,73.5,3652,147,200,70.39
 deepseek-v4-pro-high,DeepSeek,Open-Source,84,43652,168,200,67.20
