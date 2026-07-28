@@ -6,6 +6,7 @@ gpt-5.5-high,OpenAI,Commercial,88.5,10018,177,200,81.56
 gpt-5.5-xhigh,OpenAI,Commercial,90,13271,180,200,81.55
 opus-4.8-medium,Claude,Commercial,86,7712,172,200,80.28
 opus-4.8-high,Claude,Commercial,86,8870,172,200,79.65
+kimi-k3-high,Kimi,Open-Source,87.5,12250,175,200,79.50
 gpt-5.4-medium,OpenAI,Commercial,82,3177,164,200,79.24
 gpt-5.4-high,OpenAI,Commercial,80.5,3267,161,200,77.67
 opus-4.7-xhigh,Claude,Commercial,83,7481,166,200,77.41

@@ -20,6 +20,9 @@ opus-4.8-medium,Science,80.0,6042,32,40
 opus-4.8-high,Math,91.0,13934,91,100
 opus-4.8-high,Coding,81.7,1591,49,60
 opus-4.8-high,Science,80.0,7131,32,40
+kimi-k3-high,Math,88.0,19395,88,100
+kimi-k3-high,Coding,93.3,4418,56,60
+kimi-k3-high,Science,77.5,6139,31,40
 gpt-5.4-medium,Math,78.0,3235,78,100
 gpt-5.4-medium,Coding,93.3,2338,56,60
 gpt-5.4-medium,Science,75.0,4308,30,40
