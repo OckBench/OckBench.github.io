@@ -8,8 +8,9 @@
   // DISPLAY_NAMES (pretty name), LOGO_MAP (new org logo), EFFORT_SERIES
   // (scatter effort ladders), and .chart-pt.f-<family> in ock.css (new family).
   var SELECTED_MODELS = new Set([
-    'gpt-5.5-medium', 'gpt-5.5-high', 'gpt-5.4-medium',
-    'opus-4.8-xhigh', 'opus-4.8-medium', 'opus-4.7-xhigh',
+    'opus-5-low', 'opus-5-medium', 'opus-5-high', 'opus-5-xhigh', 'opus-5-max',
+    'gpt-5.5-medium', 'gpt-5.5-high', 'gpt-5.5-xhigh', 'gpt-5.4-medium',
+    'opus-4.8-xhigh', 'opus-4.8-medium', 'opus-4.8-high', 'opus-4.7-xhigh',
     'opus-4.6', 'gemini-3.1-pro-preview-medium', 'gemini-3.1-pro-preview-low',
     'kimi-k3-high', 'deepseek-v4-pro-high',
     'deepseek-v4-flash-high', 'glm-5.2-max', 'kimi-k2.6',
@@ -34,6 +35,11 @@
     'opus-4.8-high': 'Claude Opus 4.8 (high)',
     'opus-4.8-xhigh': 'Claude Opus 4.8 (xhigh)',
     'opus-4.8-max': 'Claude Opus 4.8 (max)',
+    'opus-5-low': 'Claude Opus 5 (low)',
+    'opus-5-medium': 'Claude Opus 5 (medium)',
+    'opus-5-high': 'Claude Opus 5 (high)',
+    'opus-5-xhigh': 'Claude Opus 5 (xhigh)',
+    'opus-5-max': 'Claude Opus 5 (max)',
     'opus-4.6': 'Claude Opus 4.6',
     'opus-4.5': 'Claude Opus 4.5',
     'sonnet-4.6': 'Claude Sonnet 4.6',
@@ -101,6 +107,7 @@
   var EFFORT_SERIES = [
     ['gpt-5.4', 'gpt-5.4-low', 'gpt-5.4-medium', 'gpt-5.4-high'],
     ['gpt-5.5', 'gpt-5.5-low', 'gpt-5.5-medium', 'gpt-5.5-high', 'gpt-5.5-xhigh'],
+    ['opus-5-low', 'opus-5-medium', 'opus-5-high', 'opus-5-xhigh', 'opus-5-max'],
     ['opus-4.8-low', 'opus-4.8-medium', 'opus-4.8-high', 'opus-4.8-xhigh', 'opus-4.8-max'],
     ['gemini-3.1-pro-preview-low', 'gemini-3.1-pro-preview-medium'],
     ['deepseek-v4-pro-none', 'deepseek-v4-pro-high', 'deepseek-v4-pro-max'],

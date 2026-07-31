@@ -90,7 +90,7 @@
         </ol>
 
         <p>
-          Through extensive evaluations on <span class="model-count">51</span> frontier and open-source model
+          Through extensive evaluations on <span class="model-count">56</span> frontier and open-source model
           settings, we find that top open-source models have nearly closed the accuracy gap but consume up to
           <strong>26&times; more tokens</strong> than commercial counterparts for comparable accuracy.
           Meanwhile, frontier commercial models are rapidly co-optimizing both dimensions, validating
@@ -101,7 +101,7 @@
           <img src="static/images/bubble_plot.png" alt="Scatter plot of accuracy versus average output tokens for all evaluated models; commercial models dominate the upper-left Pareto frontier while open-source models cluster to the right." loading="lazy">
           <figcaption>
             <span class="fig-label">Figure&nbsp;1.</span> Accuracy vs. Average Tokens across
-            <span class="model-count">51</span> evaluated model settings. Models in the upper-left corner are
+            <span class="model-count">56</span> evaluated model settings. Models in the upper-left corner are
             ideal. The Pareto frontier is dominated by commercial models; open-source models cluster to the right.
           </figcaption>
         </figure>
@@ -110,15 +110,15 @@
         <div class="observations">
           <div class="obs">
             <h4>Closed models own the frontier</h4>
-            <p>GPT-5.5 (medium) still leads at <strong>82.15</strong> OckScore, with Gemini 3.1 Pro (medium) nearly tied at <strong>82.13</strong> and 87.5% accuracy. Claude Opus 4.8 (xhigh) follows at 81.61 with the table&rsquo;s highest accuracy, 91.5%.</p>
+            <p>Claude Opus 5 (high) leads at <strong>88.84</strong> OckScore. Its xhigh setting follows at <strong>88.20</strong> with the table&rsquo;s highest accuracy, 95.0%, while max ranks third at 86.11.</p>
           </div>
           <div class="obs">
             <h4>Open vs. closed gap</h4>
-            <p>Kimi-K3 (high) matches Gemini 3.1 Pro (medium) at <strong>87.5%</strong> accuracy while using <strong>1.7&times; more tokens</strong> (12,250 vs 7,116). It ranks eighth overall and first among open-weight settings.</p>
+            <p>Kimi-K3 (high) remains the leading open-weight setting at rank 13. Claude Opus 5 (high) is 6.5 percentage points more accurate while Kimi uses <strong>1.8&times; more tokens</strong> (12,250 vs 6,745).</p>
           </div>
           <div class="obs">
-            <h4>The overthinking tax</h4>
-            <p>DeepSeek-V4-Pro scores the same <strong>84.0%</strong> at high and max effort, but max uses <strong>1.9&times; more tokens</strong> (81,408 vs 43,652), dropping OckScore from 67.20 to 61.87.</p>
+            <h4>Effort trade-offs</h4>
+            <p>Claude Opus 5 (xhigh) gains one accuracy point over high, but uses <strong>1.44&times; more tokens</strong> and scores lower. Max uses 1.95&times; the tokens of high for only 0.5 points more accuracy.</p>
           </div>
         </div>
       </div>
@@ -135,7 +135,9 @@
           = Accuracy &minus; 10 &times; ln(AvgTokens / 10,000 + 1) &mdash; higher is better. Sampling follows
           each model&rsquo;s validated evaluation configuration, and math accuracy is graded by an LLM judge.
           MiniMax-M2.7 is the equal-weight pooled average of four InfiniAI requested effort-label runs
-          (800 model-problem observations).
+          (800 model-problem observations). Opus 5 (medium) includes nine persistent zero-output
+          generation failures (eight coding and one science); they count as incorrect and are excluded
+          from the average-output-token denominator, as are all error rows.
         </p>
 
         <div class="lb-controls">
@@ -226,7 +228,7 @@
           <div class="stat"><span class="stat-n">200</span><span class="stat-l">Questions per domain</span></div>
           <div class="stat"><span class="stat-n">3</span><span class="stat-l">Task domains</span></div>
           <div class="stat"><span class="stat-n">8+</span><span class="stat-l">Source datasets</span></div>
-          <div class="stat"><span class="stat-n"><span class="model-count">51</span></span><span class="stat-l">Settings evaluated</span></div>
+          <div class="stat"><span class="stat-n"><span class="model-count">56</span></span><span class="stat-l">Settings evaluated</span></div>
         </div>
 
         <h3 class="sub-head">Benchmark composition</h3>
@@ -292,10 +294,10 @@
         <h2 class="sec-head" id="sec-findings"><span class="sec-num">5.</span> Key Findings</h2>
 
         <ol class="findings">
-          <li><strong>Closed models own the efficiency frontier.</strong> GPT-5.5 (medium) remains first at 82.15 OckScore, Gemini 3.1 Pro (medium) is second at 82.13, and Claude Opus 4.8 (xhigh) is third at 81.61 with the highest accuracy in the table (91.5%). The top seven settings are closed models; Kimi-K3 (high) is the first open-weight entry at rank 8, but GPT-5.5 (high) Pareto-dominates it with higher accuracy and fewer tokens.</li>
-          <li><strong>Open-source accuracy is close, but efficiency still lags.</strong> Kimi-K3 (high) matches Gemini 3.1 Pro (medium) at 87.5% accuracy, but spends <strong>1.7&times; more tokens</strong> (12,250 vs 7,116), leaving its OckScore 2.62 points lower (79.50 vs 82.13). The accuracy gap has closed at this point; the per-token-intelligence gap has not.</li>
+          <li><strong>Closed models own the efficiency frontier.</strong> Claude Opus 5 takes the top four positions with high, xhigh, max, and low. High leads at 88.84 OckScore; xhigh reaches the table&rsquo;s highest accuracy, 95.0%, at 88.20 OckScore. The top 12 settings are closed models, with Kimi-K3 (high) the first open-weight entry at rank 13.</li>
+          <li><strong>The open-source efficiency gap remains.</strong> Claude Opus 5 (high) reaches 94.0% accuracy with 6,745 average output tokens, while open-weight leader Kimi-K3 (high) reaches 87.5% and uses <strong>1.8&times; more tokens</strong>. Their OckScores differ by 9.34 points (88.84 vs 79.50).</li>
           <li><strong>The Overthinking Tax.</strong> In the Qwen3.5 family, larger models are both smarter <em>and</em> leaner &mdash; Qwen3.5-9B burns 116,222 tokens for 21.5% accuracy (last place at OckScore &minus;3.85), while Qwen3.5-397B-A17B reaches 67.5% using <strong>4.4&times; fewer</strong> tokens. Smaller models over-generate to compensate for lower capacity.</li>
-          <li><strong>More effort is not monotonically better.</strong> Claude Opus 4.8 peaks at xhigh (91.5%, OckScore 81.61). Moving to max lowers accuracy to 90.0% while more than doubling tokens (16,876 &rarr; 36,544), dropping OckScore to 74.62.</li>
+          <li><strong>More effort is not monotonically efficient.</strong> Claude Opus 5 peaks in OckScore at high. Xhigh gains one accuracy point but uses 1.44&times; more tokens, while max uses 1.95&times; the tokens of high for only 0.5 points more accuracy; their OckScores fall to 88.20 and 86.11.</li>
           <li><strong>Kimi-K3 raises the open-weight bar.</strong> At 87.5% accuracy, 12,250 tokens, and 79.50 OckScore, Kimi-K3 (high) gains 3.5 accuracy points over the previous open-weight leader, DeepSeek-V4-Pro (high), while using <strong>3.6&times; fewer tokens</strong> and gaining 12.30 OckScore points.</li>
           <li><strong>MiniMax-M2.7 is reported as a repeated-run average.</strong> Its row pools minimal/low/medium/high requested labels to 66.875% accuracy, 35,538 average output tokens, and 51.72 OckScore. The labels were accepted by the gateway but are not presented as a verified reasoning-depth ladder.</li>
         </ol>

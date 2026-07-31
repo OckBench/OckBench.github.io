@@ -1,4 +1,16 @@
 Model,Domain,Accuracy (%),Avg Output Tokens,Correct,Total
+opus-5-high,Math,93.0,11442,93,100
+opus-5-high,Coding,100.0,968,60,60
+opus-5-high,Science,87.5,3666,35,40
+opus-5-xhigh,Math,94.0,15652,94,100
+opus-5-xhigh,Coding,100.0,1929,60,60
+opus-5-xhigh,Science,90.0,6679,36,40
+opus-5-max,Math,94.0,21838,94,100
+opus-5-max,Coding,100.0,1845,60,60
+opus-5-max,Science,87.5,8289,35,40
+opus-5-low,Math,82.0,2763,82,100
+opus-5-low,Coding,95.0,550,57,60
+opus-5-low,Science,77.5,384,31,40
 gpt-5.5-medium,Math,80.0,6723,80,100
 gpt-5.5-medium,Coding,96.7,1739,58,60
 gpt-5.5-medium,Science,85.0,4043,34,40
@@ -14,6 +26,9 @@ gpt-5.5-high,Science,87.5,10655,35,40
 gpt-5.5-xhigh,Math,85.0,19115,85,100
 gpt-5.5-xhigh,Coding,100.0,4501,60,60
 gpt-5.5-xhigh,Science,87.5,11961,35,40
+opus-5-medium,Math,85.0,6715,85,100
+opus-5-medium,Coding,86.7,968,52,60
+opus-5-medium,Science,82.5,2133,33,40
 opus-4.8-medium,Math,88.0,11207,88,100
 opus-4.8-medium,Coding,86.7,3000,52,60
 opus-4.8-medium,Science,80.0,6042,32,40

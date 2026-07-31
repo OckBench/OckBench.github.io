@@ -1,9 +1,14 @@
 Model,Category,License,Accuracy (%),Avg Output Tokens,Correct,Total,OckScore
+opus-5-high,Claude,Commercial,94,6745,188,200,88.84
+opus-5-xhigh,Claude,Commercial,95,9740,190,200,88.20
+opus-5-max,Claude,Commercial,94.5,13130,189,200,86.11
+opus-5-low,Claude,Commercial,85,1623,170,200,83.50
 gpt-5.5-medium,OpenAI,Commercial,86,4692,172,200,82.15
 gemini-3.1-pro-preview-medium,Gemini,Commercial,87.5,7116,175,200,82.13
 opus-4.8-xhigh,Claude,Commercial,91.5,16876,183,200,81.61
 gpt-5.5-high,OpenAI,Commercial,88.5,10018,177,200,81.56
 gpt-5.5-xhigh,OpenAI,Commercial,90,13271,180,200,81.55
+opus-5-medium,Claude,Commercial,85,4215,170,200,81.48
 opus-4.8-medium,Claude,Commercial,86,7712,172,200,80.28
 opus-4.8-high,Claude,Commercial,86,8870,172,200,79.65
 kimi-k3-high,Kimi,Open-Source,87.5,12250,175,200,79.50
